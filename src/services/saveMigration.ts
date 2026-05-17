@@ -67,21 +67,120 @@ export function migrateSave(savedState: any): GameState {
      delete state.charters.activeCharter.extractedVis;
   }
 
-  // Arrays to objects migration
-  if (Array.isArray(state.territory)) {
+  // Territory migration & validation
+  if (!state.territory) {
+     state.territory = { locations: [], expansionLevel: 1, borderRisk: 0 };
+  } else if (Array.isArray(state.territory)) {
      state.territory = { locations: state.territory, expansionLevel: 1, borderRisk: 0 };
+  } else {
+     if (state.territory.locations && !Array.isArray(state.territory.locations) && typeof state.territory.locations === 'object') {
+        state.territory.locations = Object.values(state.territory.locations);
+     }
+     if (!Array.isArray(state.territory.locations)) {
+        state.territory.locations = [];
+     }
+     if (state.territory.expansionLevel === undefined) state.territory.expansionLevel = 1;
+     if (state.territory.borderRisk === undefined) state.territory.borderRisk = 0;
   }
-  if (Array.isArray(state.guilds)) {
+
+  // Guilds migration & validation
+  if (!state.guilds) {
+     state.guilds = { guilds: [], artisans: [], goods: [] };
+  } else if (Array.isArray(state.guilds)) {
      state.guilds = { guilds: state.guilds, artisans: [], goods: [] };
+  } else {
+     if (state.guilds.guilds && !Array.isArray(state.guilds.guilds) && typeof state.guilds.guilds === 'object') {
+        state.guilds.guilds = Object.values(state.guilds.guilds);
+     }
+     if (!Array.isArray(state.guilds.guilds)) state.guilds.guilds = [];
+     
+     if (state.guilds.artisans && !Array.isArray(state.guilds.artisans) && typeof state.guilds.artisans === 'object') {
+        state.guilds.artisans = Object.values(state.guilds.artisans);
+     }
+     if (!Array.isArray(state.guilds.artisans)) state.guilds.artisans = [];
+     
+     if (state.guilds.goods && !Array.isArray(state.guilds.goods) && typeof state.guilds.goods === 'object') {
+        state.guilds.goods = Object.values(state.guilds.goods);
+     }
+     if (!Array.isArray(state.guilds.goods)) state.guilds.goods = [];
   }
-  if (Array.isArray(state.commerce)) {
+
+  // Commerce migration & validation
+  if (!state.commerce) {
      state.commerce = { fairs: [], routes: [], caravans: [], stock: [] };
+  } else if (Array.isArray(state.commerce)) {
+     state.commerce = { fairs: [], routes: [], caravans: [], stock: [] };
+  } else {
+     if (state.commerce.routes && !Array.isArray(state.commerce.routes) && typeof state.commerce.routes === 'object') {
+        state.commerce.routes = Object.values(state.commerce.routes);
+     }
+     if (!Array.isArray(state.commerce.routes)) state.commerce.routes = [];
+
+     if (state.commerce.caravans && !Array.isArray(state.commerce.caravans) && typeof state.commerce.caravans === 'object') {
+        state.commerce.caravans = Object.values(state.commerce.caravans);
+     }
+     if (!Array.isArray(state.commerce.caravans)) state.commerce.caravans = [];
+
+     if (state.commerce.fairs && !Array.isArray(state.commerce.fairs) && typeof state.commerce.fairs === 'object') {
+        state.commerce.fairs = Object.values(state.commerce.fairs);
+     }
+     if (!Array.isArray(state.commerce.fairs)) state.commerce.fairs = [];
+
+     if (state.commerce.stock && !Array.isArray(state.commerce.stock) && typeof state.commerce.stock === 'object') {
+        state.commerce.stock = Object.values(state.commerce.stock);
+     }
+     if (!Array.isArray(state.commerce.stock)) state.commerce.stock = [];
   }
-  if (Array.isArray(state.conflicts)) {
+
+  // Conflicts migration & validation
+  if (!state.conflicts) {
+     state.conflicts = { activeConflicts: [], resolvedConflicts: [], tribunalPreparation: 0 };
+  } else if (Array.isArray(state.conflicts)) {
      state.conflicts = { activeConflicts: state.conflicts, resolvedConflicts: [], tribunalPreparation: 0 };
+  } else {
+     if (state.conflicts.activeConflicts && !Array.isArray(state.conflicts.activeConflicts) && typeof state.conflicts.activeConflicts === 'object') {
+        state.conflicts.activeConflicts = Object.values(state.conflicts.activeConflicts);
+     }
+     if (!Array.isArray(state.conflicts.activeConflicts)) state.conflicts.activeConflicts = [];
+
+     if (state.conflicts.resolvedConflicts && !Array.isArray(state.conflicts.resolvedConflicts) && typeof state.conflicts.resolvedConflicts === 'object') {
+        state.conflicts.resolvedConflicts = Object.values(state.conflicts.resolvedConflicts);
+     }
+     if (!Array.isArray(state.conflicts.resolvedConflicts)) state.conflicts.resolvedConflicts = [];
+
+     if (state.conflicts.tribunalPreparation === undefined) state.conflicts.tribunalPreparation = 0;
   }
-  if (Array.isArray(state.diplomacy)) {
+  // Diplomacy migration & validation
+  const defaultFactions = [
+    { id: 'nobles', name: 'Nobreza Local', relations: 50, influence: 'Média' },
+    { id: 'church', name: 'Igreja', relations: 50, influence: 'Média' },
+    { id: 'merchants', name: 'Mercadores', relations: 50, influence: 'Média' },
+    { id: 'peasants', name: 'Camponeses', relations: 50, influence: 'Média' },
+    { id: 'rivals', name: 'Rivais Arcanos', relations: 50, influence: 'Média' },
+    { id: 'hermetic', name: 'Tribunal Arcano', relations: 50, influence: 'Alta' }
+  ];
+
+  if (!state.diplomacy) {
+     state.diplomacy = { factions: defaultFactions, activeTreaties: [], pendingDemands: [] };
+  } else if (Array.isArray(state.diplomacy)) {
      state.diplomacy = { factions: state.diplomacy, activeTreaties: [], pendingDemands: [] };
+  } else {
+     if (state.diplomacy.factions && !Array.isArray(state.diplomacy.factions) && typeof state.diplomacy.factions === 'object') {
+        state.diplomacy.factions = Object.values(state.diplomacy.factions);
+     }
+     if (!Array.isArray(state.diplomacy.factions) || state.diplomacy.factions.length === 0) {
+        state.diplomacy.factions = defaultFactions;
+     }
+
+     if (state.diplomacy.activeTreaties && !Array.isArray(state.diplomacy.activeTreaties) && typeof state.diplomacy.activeTreaties === 'object') {
+        state.diplomacy.activeTreaties = Object.values(state.diplomacy.activeTreaties);
+     }
+     if (!Array.isArray(state.diplomacy.activeTreaties)) state.diplomacy.activeTreaties = [];
+
+     if (state.diplomacy.pendingDemands && !Array.isArray(state.diplomacy.pendingDemands) && typeof state.diplomacy.pendingDemands === 'object') {
+        state.diplomacy.pendingDemands = Object.values(state.diplomacy.pendingDemands);
+     }
+     if (!Array.isArray(state.diplomacy.pendingDemands)) state.diplomacy.pendingDemands = [];
   }
   if (Array.isArray(state.library)) {
       // old library didn't exist as array, but just in case

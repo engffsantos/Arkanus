@@ -5,12 +5,14 @@ export function handleConflictAction(state: GameState, action: {type: string, pa
   const nextState = JSON.parse(JSON.stringify(state)) as GameState;
 
   if (action.type === 'DIPLOMACY_SEND_EMISSARY') {
-     nextState.diplomacy.factions = nextState.diplomacy.factions.map(f => {
-         if (f.id === action.factionId) {
-             return { ...f, relations: Math.min(100, f.relations + 5) };
-         }
-         return f;
-     });
+     if (nextState.diplomacy && Array.isArray(nextState.diplomacy.factions)) {
+        nextState.diplomacy.factions = nextState.diplomacy.factions.map(f => {
+            if (f.id === action.factionId) {
+                return { ...f, relations: Math.min(100, f.relations + 5) };
+            }
+            return f;
+        });
+     }
   } else if (action.type === 'CONFLICT_PREPARE_DEFENSE') {
      nextState.conflicts.tribunalPreparation = (nextState.conflicts.tribunalPreparation || 0) + 10;
      const logEvent = createLogEvent(nextState, 'Conflitos', `Nossa defesa jurídica aumentou neste tribunal.`);
@@ -29,12 +31,14 @@ export function handleConflictAction(state: GameState, action: {type: string, pa
         nextState.events = [logEvent, ...nextState.events].slice(0, 50);
      }
   } else if (action.type === 'DIPLOMACY_OFFER_BRIBE') {
-     nextState.diplomacy.factions = nextState.diplomacy.factions.map(f => {
-         if (f.id === action.factionId) {
-             return { ...f, relations: Math.min(100, f.relations + 25) };
-         }
-         return f;
-     });
+     if (nextState.diplomacy && Array.isArray(nextState.diplomacy.factions)) {
+        nextState.diplomacy.factions = nextState.diplomacy.factions.map(f => {
+            if (f.id === action.factionId) {
+                return { ...f, relations: Math.min(100, f.relations + 25) };
+            }
+            return f;
+        });
+     }
   }
 
   return nextState;

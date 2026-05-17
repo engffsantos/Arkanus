@@ -6,7 +6,7 @@ export const DiplomacyScreen: React.FC = () => {
    const { state, dispatch } = useGameState();
 
    // Factions list from state
-   const factions = state.diplomacy?.factions || (Array.isArray(state.diplomacy) ? state.diplomacy : []);
+   const factions = (state.diplomacy && Array.isArray(state.diplomacy.factions)) ? state.diplomacy.factions : [];
 
    return (
       <div className="h-full flex flex-col gap-6">

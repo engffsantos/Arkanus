@@ -5,7 +5,7 @@ import { createLogEvent } from '../../services/actions/shared';
 export function resolveFactionPressure(state: GameState): GameState {
   const nextState = cloneGameState(state);
 
-  if (nextState.diplomacy && nextState.diplomacy.factions) {
+  if (nextState.diplomacy && Array.isArray(nextState.diplomacy.factions)) {
      nextState.diplomacy.factions = nextState.diplomacy.factions.map(f => {
          let newRel = f.relations;
          if (newRel > 50) newRel -= 1;

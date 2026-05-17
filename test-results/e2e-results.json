@@ -107,12 +107,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 10,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.908Z",
+                  "startTime": "2026-05-17T22:12:52.172Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -139,14 +139,14 @@
               "results": [
                 {
                   "workerIndex": 6,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
                   "duration": 10,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.518Z",
+                  "startTime": "2026-05-17T22:12:52.873Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -183,12 +183,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 10,
+                  "duration": 11,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.914Z",
+                  "startTime": "2026-05-17T22:12:52.152Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -214,15 +214,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
+                  "workerIndex": 7,
+                  "parallelIndex": 5,
                   "status": "passed",
-                  "duration": 11,
+                  "duration": 13,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.566Z",
+                  "startTime": "2026-05-17T22:12:52.908Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -259,12 +259,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 8,
+                  "duration": 14,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.960Z",
+                  "startTime": "2026-05-17T22:12:52.200Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -290,15 +290,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 7,
-                  "parallelIndex": 5,
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 11,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.610Z",
+                  "startTime": "2026-05-17T22:12:52.880Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -335,12 +335,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 8,
+                  "duration": 10,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.889Z",
+                  "startTime": "2026-05-17T22:12:52.155Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -366,15 +366,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 8,
-                  "parallelIndex": 3,
+                  "workerIndex": 10,
+                  "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 14,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.543Z",
+                  "startTime": "2026-05-17T22:12:52.924Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -411,12 +411,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 12,
+                  "duration": 11,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.928Z",
+                  "startTime": "2026-05-17T22:12:52.150Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -442,15 +442,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 10,
-                  "parallelIndex": 4,
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 10,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.528Z",
+                  "startTime": "2026-05-17T22:12:52.986Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -487,12 +487,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 5,
                   "status": "passed",
-                  "duration": 10,
+                  "duration": 11,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.884Z",
+                  "startTime": "2026-05-17T22:12:52.160Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -521,12 +521,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 9,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.640Z",
+                  "startTime": "2026-05-17T22:12:52.985Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -560,15 +560,15 @@
               "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 5,
-                  "parallelIndex": 5,
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 5,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.947Z",
+                  "startTime": "2026-05-17T22:12:52.223Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -595,14 +595,14 @@
               "results": [
                 {
                   "workerIndex": 6,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 3,
+                  "duration": 9,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.583Z",
+                  "startTime": "2026-05-17T22:12:52.956Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -636,15 +636,15 @@
               "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
+                  "workerIndex": 4,
+                  "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 5,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:42.947Z",
+                  "startTime": "2026-05-17T22:12:52.225Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -670,15 +670,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 10,
-                  "parallelIndex": 4,
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4,
+                  "duration": 7,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-17T21:48:43.588Z",
+                  "startTime": "2026-05-17T22:12:52.954Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -696,8 +696,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-17T21:48:42.237Z",
-    "duration": 1458.2819999999997,
+    "startTime": "2026-05-17T22:12:51.383Z",
+    "duration": 1673.735,
     "expected": 16,
     "skipped": 0,
     "unexpected": 0,

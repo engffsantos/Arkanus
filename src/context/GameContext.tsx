@@ -3,6 +3,7 @@ import { useAuth } from './AuthContext';
 import { loadGameSave, saveGameState } from '../services/gameSaveService';
 import { migrateSave } from '../services/saveMigration';
 import { GameState, Season, GameEvent } from '../types/game';
+import { GameAction } from '../types/actions';
 import { resolveAction, advanceSeason } from '../services/actionDispatcher';
 import { createInitialGameState } from '../services/campaignCreator';
 
@@ -10,7 +11,7 @@ type Action =
   | { type: 'ADVANCE_TURN'; payload: { actionDetails: any, selectedActionId: string } }
   | { type: 'LOAD_STATE'; payload: GameState }
   | { type: 'CREATE_CAMPAIGN'; payload: any }
-  | { type: 'DO_ACTION'; payload: { type: string; payload?: any; cost?: any; effects?: any; risks?: any; category?: string; description?: string; } }
+  | { type: 'DO_ACTION'; payload: GameAction }
   | { type: 'SELECT_PRIMARY_ACTION'; payload: { id: string; category: string; subAction: string; payload: any } }
   | { type: 'CANCEL_PRIMARY_ACTION' };
 

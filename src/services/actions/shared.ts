@@ -1,4 +1,7 @@
 import { GameState, GameEvent } from '../../types/game';
+import { ActionCost, GameEffect } from '../../types/actions';
+import { cloneGameState } from '../../utils/immutable';
+import { clamp } from '../../utils/clamp';
 
 export function createLogEvent(state: GameState, category: string, text: string): GameEvent {
   return {
@@ -10,36 +13,50 @@ export function createLogEvent(state: GameState, category: string, text: string)
   };
 }
 
-export function applyEffects(state: GameState, effects: {target: string, value: number}[]): GameState {
-  let nextState = JSON.parse(JSON.stringify(state)) as GameState;
+export function applyEffects(state: GameState, effects: GameEffect[]): GameState {
+  let nextState = cloneGameState(state);
   
   for (const effect of effects) {
-    if (effect.target === 'publicHealth') {
-      nextState.covenant.publicHealth = Math.max(0, Math.min(100, nextState.covenant.publicHealth + effect.value));
+    const value = typeof effect.value === 'number' ? effect.value : 0;
+    
+    if (effect.path === 'publicHealth' || effect.target === 'covenant') {
+        if (effect.path === 'publicHealth') nextState.covenant.publicHealth = clamp(nextState.covenant.publicHealth + value, 0, 100);
+        if (effect.path === 'loyalty') nextState.covenant.loyalty = clamp(nextState.covenant.loyalty + value, 0, 100);
+        if (effect.path === 'security') nextState.covenant.security = clamp(nextState.covenant.security + value, 0, 100);
+        if (effect.path === 'unrest') nextState.covenant.unrest = clamp(nextState.covenant.unrest + value, 0, 100);
     }
-    if (effect.target === 'loyalty') {
-      nextState.covenant.loyalty = Math.max(0, Math.min(100, nextState.covenant.loyalty + effect.value));
-    }
-    if (effect.target === 'security') {
-      nextState.covenant.security = Math.max(0, Math.min(100, nextState.covenant.security + effect.value));
-    }
-    if (effect.target === 'epidemicRisk') {
-      nextState.health.epidemicRisk = Math.max(0, Math.min(100, nextState.health.epidemicRisk + effect.value));
-    }
-    if (effect.target === 'unrest') {
-      nextState.covenant.unrest = Math.max(0, Math.min(100, nextState.covenant.unrest + effect.value));
+    
+    if (effect.target === 'health') {
+        if (effect.path === 'epidemicRisk') nextState.health.epidemicRisk = clamp(nextState.health.epidemicRisk + value, 0, 100);
     }
   }
   return nextState;
 }
 
-export function applyCost(state: GameState, cost: {prata?: number}): { state: GameState, error?: string } {
-    let nextState = JSON.parse(JSON.stringify(state)) as GameState;
-    if (cost?.prata) {
-      if (nextState.resources.prata < cost.prata) {
+export function applyCost(state: GameState, cost: ActionCost): { state: GameState, error?: string } {
+    let nextState = cloneGameState(state);
+    if (!cost) return { state: nextState };
+
+    if (cost.silver) {
+      if (nextState.resources.prata < cost.silver) {
         return { state, error: 'Prata insuficiente.' };
       }
-      nextState.resources.prata -= cost.prata;
+      nextState.resources.prata -= cost.silver;
     }
+    
+    if (cost.influence) {
+      if (nextState.resources.influencia < cost.influence) {
+        return { state, error: 'Influência insuficiente.' };
+      }
+      nextState.resources.influencia -= cost.influence;
+    }
+
+    if (cost.prestige) {
+      if (nextState.resources.prestigio < cost.prestige) {
+        return { state, error: 'Prestígio insuficiente.' };
+      }
+      nextState.resources.prestigio -= cost.prestige;
+    }
+    
     return { state: nextState };
 }

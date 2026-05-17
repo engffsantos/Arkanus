@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "GameSave": {
+      "title": "GameSave",
+      "description": "The current state of a player's game",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "season": { "type": "string" },
+        "year": { "type": "number" },
+        "resources": { "type": "object" },
+        "events": { "type": "array" },
+        "updatedAt": { "type": "object" }
+      },
+      "required": ["uid", "season", "year"]
+    },
+    "GameEvent": {
+      "title": "GameEvent",
+      "description": "A single event in the game log",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "text": { "type": "string" },
+        "time": { "type": "string" }
+      }
+    },
+    "PublicStats": {
+      "title": "PublicStats",
+      "description": "Global statistics",
+      "type": "object",
+      "properties": {
+        "totalPlayers": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/gameSaves/{userId}": {
+      "schema": { "$ref": "#/entities/GameSave" },
+      "description": "User game saves"
+    },
+    "/gameEvents/{userId}/events/{eventId}": {
+      "schema": { "$ref": "#/entities/GameEvent" },
+      "description": "User game events log"
+    },
+    "/publicStats/{statId}": {
+      "schema": { "$ref": "#/entities/PublicStats" },
+      "description": "Global publicly readable stats"
+    }
+  }
+}

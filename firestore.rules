@@ -1,0 +1,104 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Helper Functions
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+    function existing() { 
+      return resource.data; 
+    }
+    function incoming() { 
+      return request.resource.data; 
+    }
+    function isValidId(id) { 
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+
+    // Validation definitions
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid']) &&
+             data.uid is string &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidGameSave(data) {
+      return data.keys().hasAll(['uid', 'meta', 'resources', 'covenant']) &&
+             data.uid is string &&
+             data.uid == request.auth.uid &&
+             data.meta is map &&
+             data.meta.season in ['Primavera', 'Verão', 'Outono', 'Inverno'] &&
+             data.meta.year is number &&
+             data.meta.year >= 1 &&
+             data.resources is map &&
+             data.resources.prata is number &&
+             data.covenant is map &&
+             data.covenant.loyalty is number &&
+             data.covenant.loyalty >= 0 &&
+             data.covenant.loyalty <= 100;
+    }
+    
+    function isValidGameEvent(data) {
+      return data.keys().hasAll(['type', 'text']) &&
+             data.type is string &&
+             data.type.size() <= 100 &&
+             data.text is string &&
+             data.text.size() <= 2000;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /users/{userId} {
+      // User can read their own profile
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      
+      // User can create their own profile
+      allow create: if isSignedIn() && 
+                    isValidId(userId) && 
+                    userId == request.auth.uid &&
+                    isValidUser(incoming());
+                    
+      // User can update their own profile
+      allow update: if isSignedIn() && 
+                    request.auth.uid == userId &&
+                    isValidUser(incoming()) &&
+                    incoming().uid == existing().uid;
+    }
+
+    match /gameSaves/{userId} {
+      // User can read their own save
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      
+      // User can create their own save
+      allow create: if isSignedIn() && 
+                    isValidId(userId) && 
+                    userId == request.auth.uid &&
+                    isValidGameSave(incoming());
+                    
+      // User can update their own save
+      allow update: if isSignedIn() && 
+                    request.auth.uid == userId &&
+                    isValidGameSave(incoming()) &&
+                    incoming().uid == existing().uid;
+    }
+
+    match /gameEvents/{userId}/events/{eventId} {
+      allow get, list: if isSignedIn() && request.auth.uid == userId;
+      
+      allow create: if isSignedIn() && 
+                    isValidId(userId) && 
+                    userId == request.auth.uid &&
+                    isValidId(eventId) &&
+                    isValidGameEvent(incoming());
+    }
+
+    match /publicStats/{statId} {
+      allow get, list: if true;
+      allow write: if false; // System only
+    }
+  }
+}

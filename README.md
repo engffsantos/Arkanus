@@ -1,11 +1,24 @@
-<div align="center">
+# Arkanus
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Jogo web/PWA de estratégia hermética por turnos.
 
-  <h1>Built with AI Studio</h2>
+## Instalação
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+npm install
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Desenvolvimento
 
-</div>
+npm run dev
+
+## Build
+
+npm run build
+
+## Deploy Firebase
+
+firebase deploy
+
+## Configuração
+
+O arquivo `firebase-applet-config.json` inicializa o Firebase no MVP atual.
+Na ausência deste, preencha as variáveis de ambiente baseadas no seu `.env.example`.

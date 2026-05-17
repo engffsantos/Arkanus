@@ -1,0 +1,6 @@
+{
+  "name": "Arkanus",
+  "description": "Arkanus: governe a estação, domine o território, escreva o conhecimento e sobreviva ao peso da magia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

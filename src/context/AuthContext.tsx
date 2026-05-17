@@ -8,6 +8,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: () => Promise<void>;
+  loginAsGuest: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -71,6 +72,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const handleLoginAsGuest = async () => {
+    setLoading(true);
+    setUser({
+      uid: 'guest_magus_123',
+      email: 'convidado@arkanus.com',
+      displayName: 'Magus Convidado',
+      photoURL: null,
+    } as any);
+    setLoading(false);
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -80,7 +92,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login: handleLogin, logout: handleLogout }}>
+    <AuthContext.Provider value={{ user, loading, login: handleLogin, loginAsGuest: handleLoginAsGuest, logout: handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

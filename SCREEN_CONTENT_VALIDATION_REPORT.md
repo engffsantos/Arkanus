@@ -72,9 +72,12 @@ Todos os testes unitários, testes de integração, testes end-to-end (Playwrigh
 
 ## Problemas encontrados
 1. **Conflito de empacotamento do Playwright no HMR do Vite**: Vite tentava analisar e otimizar `playwright-core` no cliente-side durante atualizações HMR em telas de gameplay, falhando ao buscar bibliotecas exclusivas do ambiente Node (como `chromium-bidi`).
+2. **Erro 404 no carregamento de recurso no login**: A variável `VITE_FIREBASE_AUTH_DOMAIN` estava incorretamente configurada como `localhost` no arquivo de ambiente `.env.local`, forçando o Firebase SDK a tentar carregar seu iframe de sessão (`/__/auth/iframe`) a partir do host local padrão (`https://localhost:443`) em vez do domínio oficial do Firebase, resultando em erro 404 e travando a inicialização da autenticação.
 
 ## Correções aplicadas
 1. **Configuração do `vite.config.ts`**: Adicionado o bloco `optimizeDeps` especificando `index.html` como única entrada e excluindo explicitamente dependências exclusivas de testes Node-side (`@playwright/test`, `playwright`, `playwright-core`, `chromium-bidi`) da pré-otimização do Vite.
+2. **Correção de Ambiente (`.env.local`)**: Comentada a linha de override `VITE_FIREBASE_AUTH_DOMAIN=localhost`, permitindo que o Firebase SDK faça o fallback automático seguro para o domínio correto configurado no arquivo `firebase-applet-config.json`.
+3. **Implementação do Modo Teste (Mock Auth)**: Integrado um botão "Entrar em Modo Teste" premium na tela de Login (`LoginScreen.tsx` e `AuthContext.tsx`) que permite autenticação local instantânea e segura, cumprindo os requisitos da especificação (`salvo modo teste`) e agilizando testes locais.
 
 ## Pendências
 Nenhuma pendência técnica. Todos os critérios da matriz de conformidade foram atendidos.

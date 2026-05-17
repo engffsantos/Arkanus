@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Shield, Sparkles } from 'lucide-react';
 
 export const LoginScreen: React.FC = () => {
-  const { login } = useAuth();
+  const { login, loginAsGuest } = useAuth();
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-arkanus-bg text-arkanus-text justify-center items-center relative">
@@ -17,13 +17,23 @@ export const LoginScreen: React.FC = () => {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-arkanus-border to-transparent my-2"></div>
 
-        <button
-          onClick={login}
-          className="w-full py-3 px-6 bg-arkanus-gold text-stone-900 border border-amber-400/50 hover:bg-amber-300 transition-colors uppercase tracking-[0.15em] font-medium text-sm rounded shadow-[0_0_15px_rgba(202,138,4,0.3)] hover:shadow-[0_0_25px_rgba(202,138,4,0.5)] flex justify-center items-center gap-3"
-        >
-          <Shield className="w-4 h-4" />
-          Entrar com Google
-        </button>
+        <div className="w-full flex flex-col gap-3">
+          <button
+            onClick={login}
+            className="w-full py-3 px-6 bg-arkanus-gold text-stone-900 border border-amber-400/50 hover:bg-amber-300 transition-colors uppercase tracking-[0.15em] font-medium text-sm rounded shadow-[0_0_15px_rgba(202,138,4,0.3)] hover:shadow-[0_0_25px_rgba(202,138,4,0.5)] flex justify-center items-center gap-3 cursor-pointer"
+          >
+            <Shield className="w-4 h-4" />
+            Entrar com Google
+          </button>
+
+          <button
+            onClick={loginAsGuest}
+            className="w-full py-3 px-6 bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 text-stone-300 transition-colors uppercase tracking-[0.15em] font-medium text-sm rounded flex justify-center items-center gap-3 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-amber-500" />
+            Entrar em Modo Teste
+          </button>
+        </div>
       </div>
 
       {/* Decorative */}

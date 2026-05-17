@@ -1,6 +1,6 @@
 import {
   GoogleAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
   getRedirectResult,
   signOut,
   onAuthStateChanged,
@@ -11,7 +11,7 @@ import { auth } from "./firebase";
 const provider = new GoogleAuthProvider();
 
 export function loginWithGoogleRedirect() {
-  return signInWithRedirect(auth, provider);
+  return signInWithPopup(auth, provider);
 }
 
 export function handleRedirectResult() {

@@ -100,5 +100,45 @@ service cloud.firestore {
       allow get, list: if true;
       allow write: if false; // System only
     }
+
+    match /multiplayer_regions/{regionId} {
+      allow read: if isSignedIn();
+      allow write: if false; // System only creates regions
+    }
+
+    match /multiplayer_sovereignties/{sovId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid;
+      allow update: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    match /multiplayer_actions/{actionId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid;
+      allow update: if false; // Prevent update of submitted actions by user
+    }
+
+    match /multiplayer_events/{eventId} {
+      allow read: if isSignedIn();
+      allow write: if false; // System writes events
+    }
+
+    match /multiplayer_treaties/{treatyId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && incoming().proposerId == request.auth.uid;
+      allow update: if isSignedIn() && existing().targetId == request.auth.uid;
+    }
+
+    match /multiplayer_tribunal/{caseId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && incoming().accuserId == request.auth.uid;
+      allow update: if isSignedIn(); // Any valid voter can vote (could add stricter rules later)
+    }
+
+    match /multiplayer_certamen/{duelId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && incoming().challengerId == request.auth.uid;
+      allow update: if isSignedIn() && (existing().challengedId == request.auth.uid || existing().challengerId == request.auth.uid);
+    }
   }
 }

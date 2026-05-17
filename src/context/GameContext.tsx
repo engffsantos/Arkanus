@@ -7,7 +7,7 @@ import { GameAction } from '../types/actions';
 import { resolveAction, advanceSeason } from '../services/actionDispatcher';
 import { createInitialGameState } from '../services/campaignCreator';
 
-type Action = 
+type Action =
   | { type: 'ADVANCE_TURN'; payload: { actionDetails: any, selectedActionId: string } }
   | { type: 'LOAD_STATE'; payload: GameState }
   | { type: 'CREATE_CAMPAIGN'; payload: any }
@@ -34,8 +34,8 @@ const initialState: GameState = {
     influencia: 10,
     prestigio: 5
   },
-  mage: { 
-    name: 'Severian', 
+  mage: {
+    name: 'Severian',
     tradition: 'Filhos de Mercúrio',
     intelligence: 3,
     communication: 2,
@@ -68,7 +68,7 @@ const initialState: GameState = {
     books: [], capacity: 100, transcriptionProjects: [], scribes: 1, binders: 0, illuminators: 0
   },
   territory: { locations: [], expansionLevel: 1, borderRisk: 10 },
-  charters: { 
+  charters: {
     activeCharter: { type: 'general', sympatheticConnectionActive: true, citizens: 450, eligibleResidents: 1000, auraSacraEffect: 0, auraArcanaEffect: 0, extractedEssencia: false }
   },
   guilds: { guilds: [], artisans: [], goods: [] },
@@ -170,7 +170,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (user) {
           loadedState = await loadGameSave(user.uid);
         }
-        
+
         if (!loadedState) {
           const savedState = localStorage.getItem(localKey);
           if (savedState) {

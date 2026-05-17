@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import { listenAuthState, loginWithGooglePopup, logout } from '../firebase/auth';
+import { listenAuthState, loginWithGoogleRedirect, handleRedirectResult, logout } from '../firebase/auth';
 
 interface AuthContextType {
   user: User | null;
@@ -17,11 +17,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Captura o resultado do redirect quando o Firebase retorna ao app
+  useEffect(() => {
+    handleRedirectResult()
+      .then(async (result) => {
+        if (result?.user) {
+          try {
+            await setDoc(doc(db, 'users', result.user.uid), {
+              uid: result.user.uid,
+              email: result.user.email,
+              displayName: result.user.displayName,
+              photoURL: result.user.photoURL,
+              lastLoginAt: serverTimestamp()
+            }, { merge: true });
+          } catch (error) {
+            console.error("Error saving user profile after redirect:", error);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Redirect result error:", error);
+      });
+  }, []);
+
   useEffect(() => {
     const unsubscribe = listenAuthState(async (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      
+
       if (currentUser) {
         try {
           await setDoc(doc(db, 'users', currentUser.uid), {
@@ -42,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const handleLogin = async () => {
     try {
-      await loginWithGooglePopup();
+      await loginWithGoogleRedirect();
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -70,3 +93,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

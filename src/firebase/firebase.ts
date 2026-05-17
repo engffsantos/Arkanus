@@ -1,14 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import _jsonConfig from "../../firebase-applet-config.json";
 
-let firebaseConfig: any = {};
-try {
-  const jsonConfig = require("../../firebase-applet-config.json");
-  firebaseConfig = { ...jsonConfig };
-} catch (e) {
-  // It's a fallback
-}
+let firebaseConfig: any = _jsonConfig || {};
 
 // Prefer VITE_FIREBASE_ variables if available
 const env = (import.meta as any).env || {};

@@ -62,19 +62,26 @@ const PlaceholderScreen = ({ title }: { title: string }) => (
   </div>
 );
 
-// Auth guard component
+// Loading screen
+const LoadingScreen = () => (
+  <div className="flex flex-col h-screen overflow-hidden bg-arkanus-bg text-arkanus-text justify-center items-center">
+    <p className="font-display text-lg text-arkanus-gold tracking-[0.2em] uppercase animate-pulse">Carregando Arcanos...</p>
+  </div>
+);
+
+// Auth guard: bloqueia rotas privadas
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
-  
-  if (loading) {
-    return (
-      <div className="flex flex-col h-screen overflow-hidden bg-arkanus-bg text-arkanus-text justify-center items-center">
-         <p className="font-display text-lg text-arkanus-gold tracking-[0.2em] uppercase animate-pulse">Carregando Arcanos...</p>
-      </div>
-    );
-  }
-  
+  if (loading) return <LoadingScreen />;
   if (!user) return <Navigate to="/login" replace />;
+  return children;
+};
+
+// Public route: redireciona usuário autenticado que volta do OAuth
+const PublicRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user, loading } = useAuth();
+  if (loading) return <LoadingScreen />;
+  if (user) return <Navigate to="/" replace />;
   return children;
 };
 
@@ -82,7 +89,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/login" element={<PublicRoute><LoginScreen /></PublicRoute>} />
         
         <Route path="/" element={<ProtectedRoute><PortalScreen /></ProtectedRoute>} />
         <Route path="/create" element={<ProtectedRoute><CreateSovereigntyScreen /></ProtectedRoute>} />

@@ -85,6 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const handleLogout = async () => {
     try {
+      setUser(null); // Force clear local session (crucial for Guest Mode)
       await logout();
     } catch (error) {
       console.error("Logout failed:", error);

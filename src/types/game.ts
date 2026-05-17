@@ -1,13 +1,20 @@
+import { GameActionDomain, GameActionType } from './actions';
+
 export type Season = 'Primavera' | 'Verão' | 'Outono' | 'Inverno';
 
-export interface ActiveAction {
-  id: string;
+export interface PrimaryActionState {
   selected: boolean;
-  category: string;
-  subAction: string;
+  actionId: string | null;
+  actionType: GameActionType | string | null;
+  domain: GameActionDomain | string | null;
+  label: string | null;
   payload: any;
   locked: boolean;
   resolved: boolean;
+  // Legacy fields for backward compatibility during transition
+  id?: string;
+  category?: string;
+  subAction?: string;
 }
 
 export interface GameMeta {
@@ -16,7 +23,8 @@ export interface GameMeta {
   year: number;
   season: Season;
   turn: number;
-  primaryAction?: ActiveAction;
+  primaryAction?: PrimaryActionState;
+  activeEventsQueue?: string[]; // Queue of IDs of events waiting for user choices
   createdAt: string;
   updatedAt: string;
   version: string;

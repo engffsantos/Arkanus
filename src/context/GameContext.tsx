@@ -108,12 +108,17 @@ function gameReducer(state: GameState, action: Action): GameState {
           ...state.meta,
           primaryAction: {
             selected: true,
+            locked: true,
+            resolved: false,
+            actionId: action.payload.id,
+            actionType: null,
+            domain: action.payload.category,
+            label: action.payload.subAction,
+            payload: action.payload.payload,
+            // legacy
             id: action.payload.id,
             category: action.payload.category,
-            subAction: action.payload.subAction,
-            payload: action.payload.payload,
-            locked: true,
-            resolved: false
+            subAction: action.payload.subAction
           }
         }
       };

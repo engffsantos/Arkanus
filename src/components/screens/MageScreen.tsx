@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useGameState } from '../../context/GameContext';
 import { User, Zap, Brain, Book, Flame, Swords, History } from 'lucide-react';
-import { calculateWritingQuality, calculateWritingProgress, calculateLabTotal } from '../../services/mageFormulas';
+import { calculateLabTotal } from '../../systems/magus/calculateLabTotal';
+import { calculateWritingQuality, calculateWritingProgress } from '../../systems/magus/calculateWritingQuality';
 
 export const MageScreen: React.FC = () => {
     const { state, dispatch } = useGameState();
@@ -18,21 +19,9 @@ export const MageScreen: React.FC = () => {
     const bestTechnique = Object.entries(mage.arts.techniques).sort((a, b) => (b[1] as number) - (a[1] as number))[0];
     const bestForm = Object.entries(mage.arts.forms).sort((a, b) => (b[1] as number) - (a[1] as number))[0];
     
-    const maxLabTotal = calculateLabTotal({
-        mage,
-        technique: bestTechnique[0] as any,
-        form: bestForm[0] as any,
-        laboratoryQuality: state.laboratory.quality,
-        auraBonus: state.covenant.auraArcana / 10,
-        materialBonus: 0,
-        assistantBonus: 0
-    });
-
-    const writeQuality = calculateWritingQuality({
-        mage, scribeBonus: state.library.scribes, binderBonus: state.library.binders, illuminatorBonus: state.library.illuminators, resonanceBonus: 0
-    });
-
-    const writeProgress = calculateWritingProgress(mage);
+    const maxLabTotal = calculateLabTotal(state, bestTechnique[0] as any, bestForm[0] as any);
+    const writeQuality = calculateWritingQuality(state);
+    const writeProgress = calculateWritingProgress(state);
     
     // Duel power
     const duelPower = (mage.arts.techniques[bestTechnique[0] as keyof typeof mage.arts.techniques] || 0) + (mage.arts.forms.mentem || 0);

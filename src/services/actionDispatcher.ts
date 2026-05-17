@@ -8,6 +8,7 @@ import { handleCharterAction } from './actions/charterActions';
 import { handleCommerceAction } from './actions/commerceActions';
 import { handleConflictAction } from './actions/conflictActions';
 import { cloneGameState } from '../utils/immutable';
+import { resolveEventAction } from '../systems/events/eventResolver';
 
 export { applyEffects, createLogEvent };
 
@@ -25,7 +26,9 @@ export function resolveAction(state: GameState, action: GameAction): ResolvedAct
   nextState.events = [logEvent, ...nextState.events].slice(0, 50);
 
   if (typeof action.type === 'string') {
-    if (action.type.startsWith('LAB_')) {
+    if (action.type === 'EVENT_CHOOSE_OPTION') {
+      nextState = resolveEventAction(nextState, action as any).state;
+    } else if (action.type.startsWith('LAB_')) {
       nextState = handleLaboratoryAction(nextState, action as any);
     } else if (action.type.startsWith('LIBRARY_')) {
       nextState = handleLibraryAction(nextState, action as any);
@@ -45,4 +48,4 @@ export function dispatchGameAction(state: GameState, action: GameAction): Resolv
    return resolveAction(state, action);
 }
 
-export { advanceSeason } from './season/seasonEngine';
+export { advanceSeason } from '../systems/seasons/advanceSeason';

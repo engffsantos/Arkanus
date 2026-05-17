@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { advanceSeason } from "../../src/services/season/seasonEngine";
+import { advanceSeason } from "../../src/systems/seasons/advanceSeason";
 import { createInitialGameState } from "../../src/services/campaignCreator";
 
 describe("advanceSeason & seasonEngine", () => {
@@ -38,15 +38,19 @@ describe("advanceSeason & seasonEngine", () => {
     const initialState = createInitialGameState(commonConfig);
     
     initialState.meta.primaryAction = {
-        id: "123",
         selected: true,
         locked: true,
         resolved: false,
-        category: "Governança",
-        subAction: "test_action",
+        actionId: "123",
+        actionType: null,
+        domain: "Governança",
+        label: "test_action",
         payload: {
             type: "DUMMY_ACTION"
-        }
+        },
+        id: "123",
+        category: "Governança",
+        subAction: "test_action"
     };
     
     const nextState = advanceSeason(initialState);
@@ -59,13 +63,21 @@ describe("advanceSeason & seasonEngine", () => {
     
     initialState.laboratory.level = 2;
     initialState.laboratory.quality = 3;
+    initialState.covenant.auraArcana = 20; // +2 bonus
+    initialState.mage.characteristics = { intelligence: 3 } as any;
+    initialState.mage.abilities = { magicTheory: 4 } as any;
+    initialState.mage.arts = {
+        techniques: { creo: 5 } as any,
+        forms: { ignem: 5 } as any
+    };
+
     initialState.laboratory.activeProjects = [
       {
         id: 'p1',
         name: 'Spell 1',
         type: 'spell',
-        technique: 5,
-        form: 5,
+        technique: 'creo' as any,
+        form: 'ignem' as any,
         requiredTotal: 50,
         accumulatedProgress: 0,
         essenciaCost: 0,
@@ -75,17 +87,23 @@ describe("advanceSeason & seasonEngine", () => {
     ];
 
     initialState.meta.primaryAction = {
-        id: "123",
         selected: true,
         locked: true,
         resolved: false,
+        actionId: "123",
+        actionType: "LAB_START_PROJECT",
+        domain: "laboratory",
+        label: "study",
+        payload: { type: "LAB_STUDY" },
+        id: "123",
         category: "Laboratório",
-        subAction: "study",
-        payload: { type: "LAB_STUDY" }
+        subAction: "study"
     };
     
     const nextState = advanceSeason(initialState);
-    // Progress given = 15 + level(2) + quality(3) = 20
-    expect(nextState.laboratory.activeProjects[0].accumulatedProgress).toBe(20);
+    // Int(3) + MT(4) + Creo(5) + Ignem(5) + LabQ(3) + Aura(20 = 20 bonus wait no, auraArcana was added fully so +20)
+    // In `calculateLabTotal`: total += state.covenant.auraArcana; (wait, is it pure value or /10? It's pure value).
+    // So 3+4+5+5+3+20 = 40.
+    expect(nextState.laboratory.activeProjects[0].accumulatedProgress).toBe(40);
   });
 });

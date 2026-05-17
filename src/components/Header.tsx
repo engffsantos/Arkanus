@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Compass, Flower, Sun, Coins, Gem, Users, Shield, Zap, LogOut, Loader2, Cloud, CloudOff } from 'lucide-react';
 import { useGameState } from '../context/GameContext';
 import { useAuth } from '../context/AuthContext';
@@ -6,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 export const Header: React.FC = () => {
   const { state, dispatch, isSaving } = useGameState();
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   
   const formatNumber = (num?: number) => (num || 0).toLocaleString('pt-BR');
 
@@ -39,7 +41,7 @@ export const Header: React.FC = () => {
              </div>
              
              <button 
-               onClick={() => window.location.reload()}
+               onClick={() => navigate('/')}
                className="text-arkanus-text-dim hover:text-arkanus-gold-light transition-colors flex items-center gap-1 uppercase tracking-wider"
                title="Voltar ao Portal"
              >

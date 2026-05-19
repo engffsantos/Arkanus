@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, deleteDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { GameState } from "../types/game";
 import { migrateSave, CURRENT_SAVE_VERSION } from "./saveMigration";
@@ -13,6 +13,11 @@ export async function loadGameSave(uid: string): Promise<GameState | null> {
 
   // Cast the returned data to GameState and migrate it
   return migrateSave(snapshot.data());
+}
+
+export async function deleteGameSave(uid: string) {
+  const ref = doc(db, "gameSaves", uid);
+  await deleteDoc(ref);
 }
 
 export async function saveGameState(uid: string, gameState: GameState) {

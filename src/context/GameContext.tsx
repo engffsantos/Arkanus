@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
-import { loadGameSave, saveGameState } from '../services/gameSaveService';
+import { loadGameSave, saveGameState, deleteGameSave } from '../services/gameSaveService';
 import { migrateSave } from '../services/saveMigration';
 import { GameState, Season, GameEvent } from '../types/game';
 import { GameAction } from '../types/actions';
@@ -13,7 +13,8 @@ type Action =
   | { type: 'CREATE_CAMPAIGN'; payload: any }
   | { type: 'DO_ACTION'; payload: GameAction }
   | { type: 'SELECT_PRIMARY_ACTION'; payload: { id: string; category: string; subAction: string; payload: any } }
-  | { type: 'CANCEL_PRIMARY_ACTION' };
+  | { type: 'CANCEL_PRIMARY_ACTION' }
+  | { type: 'RESET_STATE' };
 
 const seasons: Season[] = ['Primavera', 'Verão', 'Outono', 'Inverno'];
 
@@ -137,6 +138,8 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
     case 'LOAD_STATE':
       return { ...initialState, ...action.payload };
+    case 'RESET_STATE':
+      return initialState;
     default:
       return state;
   }
@@ -146,6 +149,7 @@ const GameContext = createContext<{
   state: GameState;
   dispatch: React.Dispatch<Action>;
   isSaving: boolean;
+  deleteCampaign: () => Promise<void>;
 } | undefined>(undefined);
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -154,6 +158,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isSaving, setIsSaving] = useState(false);
   const isFirstLoad = useRef(true);
   const isInitializing = useRef(false);
+  const isDeleting = useRef(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -194,11 +199,13 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (isFirstLoad.current) return;
+    if (isDeleting.current) return;
 
     const localKey = user ? `arkanus_save_${user.uid}` : 'arkanus_save_guest';
     localStorage.setItem(localKey, JSON.stringify(state));
 
     const timeoutId = setTimeout(async () => {
+      if (isDeleting.current) return;
       if (user) {
         setIsSaving(true);
         try {
@@ -214,8 +221,24 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => clearTimeout(timeoutId);
   }, [state, user]);
 
+  const deleteCampaign = async () => {
+    isDeleting.current = true;
+    try {
+      if (user) {
+        await deleteGameSave(user.uid);
+        localStorage.removeItem(`arkanus_save_${user.uid}`);
+      } else {
+        localStorage.removeItem('arkanus_save_guest');
+      }
+      dispatch({ type: 'RESET_STATE' });
+    } finally {
+      // Mantém o flag ativo por tempo suficiente para o useEffect de auto-save não reescrever
+      setTimeout(() => { isDeleting.current = false; }, 2000);
+    }
+  };
+
   return (
-    <GameContext.Provider value={{ state, dispatch, isSaving }}>
+    <GameContext.Provider value={{ state, dispatch, isSaving, deleteCampaign }}>
       {children}
     </GameContext.Provider>
   );

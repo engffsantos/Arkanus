@@ -59,11 +59,11 @@ export const ChartersScreen: React.FC = () => {
 
    return (
       <div className="h-full flex flex-col gap-6">
-         <div className="flex justify-between items-center pb-4 border-b border-arkanus-border">
+         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 pb-4 border-b border-arkanus-border">
             <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
                <FileText className="w-8 h-8 text-amber-500" /> Forais e Direitos de Cidadania
             </h2>
-            <div className="text-right">
+            <div className="text-right shrink-0">
                <div className="text-sm uppercase tracking-widest text-arkanus-text-dim">Cidadãos Oficiais</div>
                <div className="font-display text-3xl text-stone-200">
                   {charter.citizens}
@@ -71,8 +71,8 @@ export const ChartersScreen: React.FC = () => {
             </div>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-            <div className="col-span-8 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+            <div className="col-span-12 md:col-span-8 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2">
                   <div className="bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner flex justify-between items-center">
                      <div>
                         <div className="flex items-center gap-2 mb-2">
@@ -109,7 +109,7 @@ export const ChartersScreen: React.FC = () => {
                </button>
             </div>
 
-            <div className="col-span-4 flex flex-col gap-4">
+            <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
                <div className="bg-[#0a0806] border border-arkanus-border rounded p-5 flex flex-col gap-4">
                   <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-arkanus-gold-light border-b border-arkanus-border pb-2">Balanço de Auras</h3>
                   

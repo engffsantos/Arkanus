@@ -34,11 +34,11 @@ export const GuildsScreen: React.FC = () => {
 
    return (
       <div className="h-full flex flex-col gap-6">
-         <div className="flex justify-between items-center pb-4 border-b border-arkanus-border">
+         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 pb-4 border-b border-arkanus-border">
             <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
                <Hammer className="w-8 h-8 text-amber-500" /> Guildas e Artesãos
             </h2>
-            <div className="text-right">
+            <div className="text-right shrink-0">
                <div className="text-sm uppercase tracking-widest text-arkanus-text-dim">Produção Estimada</div>
                <div className="font-display text-3xl text-green-400 flex items-center justify-end gap-2">
                   <Coins className="w-6 h-6" /> +{estimatedProduction} Prata/Estação
@@ -46,8 +46,8 @@ export const GuildsScreen: React.FC = () => {
             </div>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-            <div className="col-span-8 grid grid-cols-2 gap-4 auto-rows-max overflow-y-auto custom-scrollbar pr-2">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+            <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-max overflow-y-auto custom-scrollbar pr-2">
                {activeGuilds.map((g: any) => (
                   <div key={g.id} className="bg-[#0a0806] border border-arkanus-border rounded p-5 shadow-inner">
                      <div className="flex items-start justify-between mb-2">
@@ -60,16 +60,16 @@ export const GuildsScreen: React.FC = () => {
                   </div>
                ))}
                
-               <div 
+               <div
                   onClick={() => setShowGuildModal(true)}
-                  className="col-span-2 border border-dashed border-stone-800 rounded p-6 flex flex-col items-center justify-center opacity-60 hover:opacity-100 hover:border-amber-500/50 transition-all cursor-pointer"
+                  className="col-span-1 md:col-span-2 border border-dashed border-stone-800 rounded p-6 flex flex-col items-center justify-center opacity-60 hover:opacity-100 hover:border-amber-500/50 transition-all cursor-pointer"
                >
                   <Hammer className="w-8 h-8 text-stone-500 mb-2" />
                   <span className="uppercase tracking-widest text-xs text-stone-400 font-medium">Fundar Nova Guilda (-100 Prata)</span>
                </div>
             </div>
 
-            <div className="col-span-4 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col">
+            <div className="col-span-12 md:col-span-4 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col">
                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-amber-500 mb-4 border-b border-arkanus-border pb-2">Estoque e Manufatura</h3>
                <div className="text-center p-8 mt-4">
                   <span className="text-stone-500 text-sm italic font-serif">

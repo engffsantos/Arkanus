@@ -29,8 +29,8 @@ export const CommerceScreen: React.FC = () => {
             </h2>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-            <div className="col-span-8 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+            <div className="col-span-12 md:col-span-8 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2">
                <div className="bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner">
                   <div className="flex justify-between items-start mb-4">
                      <div>
@@ -74,7 +74,7 @@ export const CommerceScreen: React.FC = () => {
                
             </div>
 
-            <div className="col-span-4 flex flex-col gap-4">
+            <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
                <div className="bg-arkanus-panel border border-arkanus-border rounded p-5 shadow-inner">
                   <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-arkanus-gold-light mb-4 border-b border-arkanus-border pb-2">Suprimentos Cautelosos</h3>
                   <div className="space-y-3">

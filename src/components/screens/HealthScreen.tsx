@@ -30,10 +30,10 @@ export const HealthScreen: React.FC = () => {
             </div>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0 pb-6">
-            <div className="col-span-8 grid grid-cols-2 gap-4">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0 pb-6">
+            <div className="col-span-12 md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                {/* Humor Dominante */}
-               <div className="col-span-2 bg-[#0a0806] border border-arkanus-border rounded p-6 flex flex-col">
+               <div className="col-span-1 sm:col-span-2 bg-[#0a0806] border border-arkanus-border rounded p-6 flex flex-col">
                   <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-amber-500 mb-6">Equilíbrio Corporal do Feudo</h3>
                   <div className="flex items-center justify-between">
                      <div className="flex flex-col gap-1">
@@ -75,7 +75,7 @@ export const HealthScreen: React.FC = () => {
                </div>
             </div>
 
-            <div className="col-span-4 flex flex-col gap-6 w-full">
+            <div className="col-span-12 md:col-span-4 flex flex-col gap-6 w-full">
                <div className="bg-arkanus-panel border border-arkanus-border shadow-inner rounded p-6">
                   <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-arkanus-gold-light mb-6 border-b border-arkanus-border pb-2">Profissionais de Cura</h3>
                   

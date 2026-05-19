@@ -11,7 +11,7 @@ export const MapScreen: React.FC = () => {
 
    return (
       <div className="h-full flex flex-col gap-6">
-         <div className="flex justify-between items-center pb-4 border-b border-arkanus-border">
+         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 pb-4 border-b border-arkanus-border">
             <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
                <MapIcon className="w-8 h-8 text-amber-500" /> Mapa do Território
             </h2>
@@ -21,13 +21,13 @@ export const MapScreen: React.FC = () => {
             </div>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
             {/* Lista/Pins de Locais */}
-            <div className="col-span-8 bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner relative overflow-hidden flex flex-col">
+            <div className="col-span-12 md:col-span-8 bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner relative overflow-hidden flex flex-col">
                <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
                
                <h3 className="font-medium uppercase tracking-[0.2em] text-arkanus-text-dim mb-6 z-10">Levantamento Cartográfico</h3>
-               <div className="grid grid-cols-2 gap-4 z-10 w-full overflow-y-auto pr-2 custom-scrollbar">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 z-10 w-full overflow-y-auto pr-2 custom-scrollbar">
                   {locations.map(loc => (
                      <button 
                         key={loc.id}
@@ -50,7 +50,7 @@ export const MapScreen: React.FC = () => {
             </div>
 
             {/* Detalhe do Local Selecionado */}
-            <div className="col-span-4 bg-arkanus-panel border border-arkanus-border shadow-2xl rounded p-6 flex flex-col">
+            <div className="col-span-12 md:col-span-4 bg-arkanus-panel border border-arkanus-border shadow-2xl rounded p-6 flex flex-col">
                {selectedLoc ? (
                   <div className="flex flex-col h-full">
                      <div className="mb-6 border-b border-stone-800 pb-4">

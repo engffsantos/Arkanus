@@ -1,10 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Compass, Flower, Sun, Coins, Gem, Users, Shield, Zap, LogOut, Loader2, Cloud, CloudOff } from 'lucide-react';
+import { Compass, Flower, Sun, Coins, Gem, Users, Shield, Zap, LogOut, Loader2, Cloud, CloudOff, Menu } from 'lucide-react';
 import { useGameState } from '../context/GameContext';
 import { useAuth } from '../context/AuthContext';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onMenuToggle: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
   const { state, dispatch, isSaving } = useGameState();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -52,14 +56,19 @@ export const Header: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-between px-6 py-3 bg-arkanus-panel border-b border-arkanus-border">
+        {/* Hamburger button (mobile only) */}
+        <button onClick={onMenuToggle} className="md:hidden p-2 text-arkanus-gold-light">
+          <Menu className="w-6 h-6" />
+        </button>
+
         {/* Logo / Title */}
-        <div className="flex items-center space-x-3 w-1/4">
+        <div className="flex items-center space-x-3 w-auto md:w-1/4">
           <Compass className="w-8 h-8 text-arkanus-gold" />
           <h1 className="font-display text-3xl text-arkanus-gold-light tracking-wide">Arkanus</h1>
         </div>
 
         {/* Resources Top Bar */}
-        <div className="flex items-center justify-center space-x-6 flex-1 text-sm font-sans">
+        <div className="hidden md:flex items-center justify-center space-x-6 flex-1 text-sm font-sans">
           <ResourceItem icon={<Coins className="w-4 h-4 text-gray-300" />} label="Prata" value={formatNumber(Math.floor(state.resources.prata))} delta="+320" deltaColor="text-arkanus-green" />
           <ResourceItem icon={<Gem className="w-4 h-4 text-arkanus-blue" />} label="Essência" value={formatNumber(state.resources.essencia?.total || 0)} delta="+12" deltaColor="text-arkanus-green" />
           <ResourceItem icon={<div className="w-4 h-4 bg-red-800 rounded-full border border-red-500 shadow-[0_0_5px_rgba(255,0,0,0.5)] flex items-center justify-center"><div className="w-2 h-2 bg-red-400 rounded-full"></div></div>} label="Lealdade" value={state.covenant.loyalty} delta="+5" deltaColor="text-arkanus-green" />

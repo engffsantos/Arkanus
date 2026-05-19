@@ -27,14 +27,14 @@ import { MagePanel } from './components/MagePanel';
 import { LabPanel } from './components/LabPanel';
 
 const DashboardContent = () => (
-  <div className="grid grid-cols-12 gap-4 h-full">
+  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-full">
     {/* Left Column - Sovereignty */}
-    <div className="col-span-3 min-w-[280px]">
+    <div className="col-span-1 md:col-span-3">
       <SovereigntyPanel />
     </div>
 
     {/* Center Column - Actions & Logs */}
-    <div className="col-span-6 flex flex-col gap-4">
+    <div className="col-span-1 md:col-span-6 flex flex-col gap-4">
         {/* Top Actions */}
         <div className="flex-1 min-h-[400px]">
           <ActionsPanel />
@@ -42,7 +42,7 @@ const DashboardContent = () => (
     </div>
 
     {/* Right Column - Mage & Lab */}
-    <div className="col-span-3 min-w-[280px] flex flex-col gap-4">
+    <div className="col-span-1 md:col-span-3 flex flex-col gap-4">
         {/* Top: Mage Stats */}
         <div className="flex-[1.2]">
           <MagePanel />

@@ -105,7 +105,7 @@ export const ActionsPanel: React.FC = () => {
 
       <div className="flex-1 px-6 pb-6 pt-4 flex flex-col">
         {/* Action Selection Row */}
-        <div className="flex justify-between items-end gap-2 mb-6">
+        <div className="flex flex-wrap justify-between items-end gap-2 mb-6">
           {actions.map(act => (
             <button 
               key={act.id}
@@ -130,9 +130,9 @@ export const ActionsPanel: React.FC = () => {
         </div>
 
         {/* Action Detail Card */}
-        <div className="bg-[#e4d5be] border-2 border-[#b08c5c]/70 rounded-[2px] p-5 flex gap-5 mb-auto shadow-[inset_0_0_60px_rgba(150,110,60,0.15)] relative overflow-hidden">
+        <div className="bg-[#e4d5be] border-2 border-[#b08c5c]/70 rounded-[2px] p-5 flex flex-col sm:flex-row gap-5 mb-auto shadow-[inset_0_0_60px_rgba(150,110,60,0.15)] relative overflow-hidden">
            {/* Detailed Image */}
-           <div className="w-[180px] h-[140px] rounded-[1px] border border-[#5c4a35] bg-[#2a2218] flex items-center justify-center shrink-0 overflow-hidden relative shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+           <div className="w-full sm:w-[180px] h-[140px] rounded-[1px] border border-[#5c4a35] bg-[#2a2218] flex items-center justify-center shrink-0 overflow-hidden relative shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
               <img 
                 src={currentDef.image} 
                 alt={currentDef.title} 

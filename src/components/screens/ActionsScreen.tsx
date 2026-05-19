@@ -47,10 +47,10 @@ export const ActionsScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex gap-6 h-full min-h-0">
-        
+      <div className="flex flex-col md:flex-row gap-6 h-full min-h-0">
+
         {/* Main Actions Column */}
-        <div className="w-1/3 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar relative">
+        <div className="w-full md:w-1/3 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar relative">
           {currentAction && (
              <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[1px] flex items-center justify-center p-6 text-center">
              </div>
@@ -81,7 +81,7 @@ export const ActionsScreen: React.FC = () => {
         </div>
 
         {/* Sub-Actions Column */}
-        <div className="w-2/3 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col relative overflow-hidden">
+        <div className="w-full md:w-2/3 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col relative overflow-hidden">
            {currentAction ? (
               <div className="relative z-10 flex flex-col h-full items-center justify-center text-center">
                  <div className="p-6 rounded-full bg-amber-500/10 border-2 border-amber-500/50 mb-8 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
@@ -104,7 +104,7 @@ export const ActionsScreen: React.FC = () => {
                  Estratégias de {activeMainAction.label}
                </h3>
                
-               <div className="grid grid-cols-2 gap-4 auto-rows-max">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-max">
                  {activeMainAction.subActions.map(subAction => (
                    <button
                      key={subAction}

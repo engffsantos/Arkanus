@@ -120,7 +120,7 @@ export const SettingsScreen: React.FC = () => {
                     <h2 className="text-xl font-display text-stone-300 mb-4 flex items-center gap-2 border-b border-stone-800 pb-2">
                        <FileText className="w-5 h-5 text-indigo-500" /> Status da Campanha
                     </h2>
-                    <div className="bg-[#1a1511] p-5 rounded border border-stone-800 grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <div className="bg-[#1a1511] p-5 rounded border border-stone-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                         <div>
                             <div className="text-xs text-stone-500 uppercase tracking-widest">Soberania</div>
                             <div className="text-stone-200 font-bold">{state.covenant.name}</div>

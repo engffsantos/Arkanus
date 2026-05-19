@@ -21,7 +21,7 @@ export const LibraryScreen: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col gap-6">
-      <div className="flex justify-between items-start pb-4 border-b border-arkanus-border">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 pb-4 border-b border-arkanus-border">
         <div>
           <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
              <Book className="w-8 h-8 text-amber-500" /> Biblioteca de {state.covenant?.name || 'Arkanus'}
@@ -30,7 +30,7 @@ export const LibraryScreen: React.FC = () => {
             "A tinta de um estudioso é mais preciosa que o sangue de um mártir. Aqui descansa a sabedoria das eras."
           </p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 shrink-0">
            <div className="bg-arkanus-panel border border-arkanus-border rounded p-3 text-center min-w-[100px]">
               <div className="text-xs text-arkanus-text-dim uppercase tracking-widest mb-1">Capacidade</div>
               <div className="font-display text-xl text-stone-300 font-bold">{books.length} / {lib.capacity}</div>
@@ -38,8 +38,8 @@ export const LibraryScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-        <div className="col-span-3 flex flex-col gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+        <div className="col-span-12 md:col-span-3 flex flex-col gap-4">
            <div className="bg-[#0a0806] border border-arkanus-border rounded p-4 shadow-inner">
              <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-amber-500 mb-4 pb-2 border-b border-arkanus-border">Artesãos da Palavra</h3>
              <div className="space-y-3 text-sm">
@@ -67,7 +67,7 @@ export const LibraryScreen: React.FC = () => {
            </button>
         </div>
 
-        <div className="col-span-9 bg-arkanus-panel border border-arkanus-border shadow-inner rounded p-6 overflow-y-auto custom-scrollbar flex flex-col relative">
+        <div className="col-span-12 md:col-span-9 bg-arkanus-panel border border-arkanus-border shadow-inner rounded p-6 overflow-y-auto custom-scrollbar flex flex-col relative">
            {books.length === 0 ? (
              <div className="flex-1 flex flex-col items-center justify-center text-center opacity-40">
                <Book className="w-20 h-20 text-stone-600 mb-4" />
@@ -75,7 +75,7 @@ export const LibraryScreen: React.FC = () => {
                <p className="text-stone-500 max-w-sm">A poeira cobre as prateleiras. Mande escrever ou copie textos para preencher sua biblioteca e garantir o avanço do conhecimento.</p>
              </div>
            ) : (
-             <div className="w-full grid grid-cols-2 gap-4 auto-rows-max">
+             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-max">
                {books.map((book: any, idx: number) => (
                  <div key={idx} className="p-4 border border-stone-800 hover:border-amber-900/50 rounded bg-[#1a1511] flex items-start gap-4 transition-colors">
                     <Book className="w-8 h-8 text-amber-900 shrink-0" />
@@ -110,7 +110,7 @@ export const LibraryScreen: React.FC = () => {
                       placeholder="Ex: Fundamentos de Creo"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs uppercase tracking-[0.2em] text-arkanus-gold-light mb-1 block">Tipo de Obra</label>
                       <select 

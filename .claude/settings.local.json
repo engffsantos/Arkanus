@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Fernando\\\\Downloads\\\\Arkanus\\\\Arkanus\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx skills *)"
+    ]
+  }
+}

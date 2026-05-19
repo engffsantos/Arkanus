@@ -16,11 +16,11 @@ export const DiplomacyScreen: React.FC = () => {
             </h2>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-            <div className="col-span-8 overflow-y-auto custom-scrollbar pr-2 grid gap-4">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+            <div className="col-span-12 md:col-span-8 overflow-y-auto custom-scrollbar pr-2 grid gap-4">
                {factions.map(f => (
-                  <div key={f.id} className="bg-[#0a0806] border border-arkanus-border hover:border-amber-900/50 rounded flex transition-colors shadow-inner h-fit">
-                     <div className="p-6 border-r border-arkanus-border flex flex-col w-64 shrink-0">
+                  <div key={f.id} className="bg-[#0a0806] border border-arkanus-border hover:border-amber-900/50 rounded flex flex-col md:flex-row transition-colors shadow-inner h-fit">
+                     <div className="p-6 border-b md:border-b-0 md:border-r border-arkanus-border flex flex-col w-full md:w-64 md:shrink-0">
                         <h3 className="font-display text-xl text-stone-200 mb-2">{f.name}</h3>
                         <div className="text-xs text-stone-400 uppercase tracking-widest mb-1">
                            Influência: <span className="text-amber-400">{f.influence}</span>
@@ -91,7 +91,7 @@ export const DiplomacyScreen: React.FC = () => {
                ))}
             </div>
 
-            <div className="col-span-4 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-2xl flex flex-col">
+            <div className="col-span-12 md:col-span-4 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-2xl flex flex-col">
                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-amber-500 mb-4 border-b border-arkanus-border pb-2 flex items-center gap-2">
                   <MessageSquare className="w-4 h-4" /> Notificações Recentes
                </h3>

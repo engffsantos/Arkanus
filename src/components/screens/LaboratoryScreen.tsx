@@ -24,7 +24,7 @@ export const LaboratoryScreen: React.FC = () => {
   return (
     <div className="h-full flex flex-col gap-6">
        {/* Header */}
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
         <div>
           <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
              <FlaskConical className="w-8 h-8 text-amber-500" /> Laboratório Arcano
@@ -33,8 +33,8 @@ export const LaboratoryScreen: React.FC = () => {
             "A transformação da Vontade em Realidade através do crivo da Teoria e da repetição extenuante."
           </p>
         </div>
-        
-        <div className="flex gap-4">
+
+        <div className="flex gap-4 shrink-0">
            <div className="bg-arkanus-panel border border-arkanus-border rounded p-3 text-center min-w-[100px]">
               <div className="text-xs text-arkanus-text-dim uppercase tracking-widest mb-1">Essência Restante</div>
               <div className="font-display text-xl text-fuchsia-400 font-bold">{state.resources.essencia.total}</div>
@@ -46,10 +46,10 @@ export const LaboratoryScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-         
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+
          {/* Left Column: Stats & Modifiers */}
-         <div className="col-span-4 flex flex-col gap-6">
+         <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
             <div className="bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner">
                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-arkanus-gold mb-6 border-b border-arkanus-border pb-2">Status da Oficina</h3>
                
@@ -103,7 +103,7 @@ export const LaboratoryScreen: React.FC = () => {
          </div>
 
          {/* Center/Right Column: Projects */}
-         <div className="col-span-8 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
+         <div className="col-span-12 md:col-span-8 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
             
             {(lab.activeProjects || []).length === 0 ? (
                <div className="flex-1 bg-arkanus-panel border border-dashed border-stone-800 rounded flex flex-col items-center justify-center p-12 text-center opacity-60">
@@ -123,7 +123,7 @@ export const LaboratoryScreen: React.FC = () => {
             {(lab.completedProjects || []).length > 0 && (
                <div className="mt-8 space-y-4">
                   <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-arkanus-text-dim">Grimório de Descobertas</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                      {(lab.completedProjects || []).map(project => (
                         <div key={project.id} className="bg-[#1a1511] border border-stone-800 rounded p-4 flex items-center gap-4 opacity-70">
                            <div className="p-2 bg-stone-900 rounded-full text-stone-500"><Check className="w-4 h-4" /></div>
@@ -159,7 +159,7 @@ export const LaboratoryScreen: React.FC = () => {
                       placeholder="Ex: Lança de Chamas"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs uppercase tracking-[0.2em] text-arkanus-gold-light mb-1 block">Tipo</label>
                       <select 
@@ -184,7 +184,7 @@ export const LaboratoryScreen: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs uppercase tracking-[0.2em] text-arkanus-gold-light mb-1 block">Técnica</label>
                       <select 

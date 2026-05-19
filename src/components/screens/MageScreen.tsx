@@ -32,7 +32,7 @@ export const MageScreen: React.FC = () => {
 
     return (
         <div className="h-full flex flex-col gap-6">
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                <div>
                   <h1 className="font-display text-3xl text-stone-200 tracking-wider flex items-center gap-3">
                      <User className="w-8 h-8 text-amber-500" /> Registro Arcano do Magus

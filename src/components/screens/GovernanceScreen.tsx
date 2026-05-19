@@ -48,7 +48,7 @@ export const GovernanceScreen: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col gap-6">
-      <div className="flex justify-between items-start pb-4 border-b border-arkanus-border">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 pb-4 border-b border-arkanus-border">
         <div>
           <h2 className="font-display text-3xl text-arkanus-gold-light tracking-wide flex items-center gap-3">
              <Scale className="w-8 h-8 text-amber-500" /> Sala de Governança
@@ -65,13 +65,13 @@ export const GovernanceScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-         <div className="col-span-8 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+         <div className="col-span-12 md:col-span-8 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
              <div className="bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner">
                 <h3 className="font-display text-2xl text-amber-300 mb-6 border-b border-arkanus-border pb-3">Políticas Imediatas</h3>
                 
                 <div className="grid gap-4">
-                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex items-center justify-between hover:border-amber-900/40 transition-colors">
+                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex flex-col md:flex-row md:items-center md:justify-between gap-3 hover:border-amber-900/40 transition-colors">
                       <div>
                          <h4 className="font-medium text-stone-200 flex items-center gap-2"><HeartPulseIcon className="w-4 h-4 text-red-400" /> Saneamento e Boticários</h4>
                          <p className="text-sm text-stone-500 mt-1">Constrói valas e contrata auxiliares. Aumenta Saúde (+5) e Lealdade (+2).</p>
@@ -85,7 +85,7 @@ export const GovernanceScreen: React.FC = () => {
                       </button>
                    </div>
 
-                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex items-center justify-between hover:border-amber-900/40 transition-colors">
+                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex flex-col md:flex-row md:items-center md:justify-between gap-3 hover:border-amber-900/40 transition-colors">
                       <div>
                          <h4 className="font-medium text-stone-200 flex items-center gap-2"><Shield className="w-4 h-4 text-stone-400" /> Guardas e Milícia</h4>
                          <p className="text-sm text-stone-500 mt-1">Arma homens saudáveis do feudo. Aumenta Segurança (+8) e Reduz Revolta (-5).</p>
@@ -99,7 +99,7 @@ export const GovernanceScreen: React.FC = () => {
                       </button>
                    </div>
 
-                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex items-center justify-between hover:border-amber-900/40 transition-colors">
+                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex flex-col md:flex-row md:items-center md:justify-between gap-3 hover:border-amber-900/40 transition-colors">
                       <div>
                          <h4 className="font-medium text-stone-200 flex items-center gap-2"><Hammer className="w-4 h-4 text-stone-400" /> Manutenção do Feudo</h4>
                          <p className="text-sm text-stone-500 mt-1">Repara estruturas. Aumenta Lealdade (+5) e Reduz Revolta (-10). Leva a estação inteira.</p>
@@ -131,7 +131,7 @@ export const GovernanceScreen: React.FC = () => {
                       </button>
                    </div>
                    
-                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex items-center justify-between hover:border-amber-900/40 transition-colors">
+                   <div className="p-4 border border-stone-800 bg-[#1a1511] rounded flex flex-col md:flex-row md:items-center md:justify-between gap-3 hover:border-amber-900/40 transition-colors">
                       <div>
                          <h4 className="font-medium text-stone-200 flex items-center gap-2"><Scale className="w-4 h-4 text-stone-400" /> Aumentar Impostos</h4>
                          <p className="text-sm text-stone-500 mt-1">Força a coleta. Gera Prata imediatamente, mas reduz Lealdade (-15) e aumenta Revolta (+20).</p>
@@ -170,7 +170,7 @@ export const GovernanceScreen: React.FC = () => {
              </div>
          </div>
          
-         <div className="col-span-4 flex flex-col gap-6">
+         <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
             <div className="bg-arkanus-panel border border-arkanus-border shadow-inner rounded p-5">
                <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-arkanus-gold-light mb-4">Métricas Atuais</h3>
                <div className="space-y-4 text-sm">

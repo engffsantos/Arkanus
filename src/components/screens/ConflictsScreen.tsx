@@ -17,8 +17,8 @@ export const ConflictsScreen: React.FC = () => {
             </h2>
          </div>
 
-         <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-            <div className="col-span-8 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col gap-4 overflow-y-auto">
+         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full min-h-0">
+            <div className="col-span-12 md:col-span-8 bg-arkanus-panel border border-arkanus-border rounded p-6 shadow-inner flex flex-col gap-4 overflow-y-auto">
                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-arkanus-text-dim border-b border-arkanus-border pb-2 mb-2">Disputas Ativas</h3>
                
                {conflicts.map(c => (
@@ -94,7 +94,7 @@ export const ConflictsScreen: React.FC = () => {
                )}
             </div>
 
-            <div className="col-span-4 flex flex-col gap-4">
+            <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
                <div className="bg-[#0a0806] border border-arkanus-border rounded p-6 shadow-inner flex flex-col h-full">
                   <h3 className="font-display text-xl text-amber-300 mb-4 flex items-center gap-2 border-b border-arkanus-border pb-2"><Gavel className="w-5 h-5"/> Próximo Tribunal</h3>
                   <div className="mt-4 flex-1">

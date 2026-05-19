@@ -25,7 +25,7 @@ export const ReportsScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 overflow-y-auto custom-scrollbar pr-2 pb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto custom-scrollbar pr-2 pb-6">
          <div className="bg-[#0a0806] border border-arkanus-border rounded p-6">
             <h3 className="font-display text-xl text-amber-300 flex items-center gap-2 mb-4"><Coins className="w-5 h-5"/> Tesouro e Economia</h3>
             <div className="space-y-4">

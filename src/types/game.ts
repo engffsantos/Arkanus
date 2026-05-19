@@ -87,6 +87,7 @@ export type AbilityKey =
 export interface MagusTrait {
   id: string;
   name: string;
+  description?: string;
   effects: any[];
 }
 
@@ -94,6 +95,22 @@ export interface MagusHistoryEntry {
   season: string;
   year: number;
   description: string;
+}
+
+export interface MageCreationChoices {
+  origin: string;
+  tradition: string;
+  specialization: string;
+  initialLaboratory: string;
+  ambition: string;
+  virtues: string[];
+  flaw: string;
+  arts: {
+    primaryTechnique: string;
+    primaryForm: string;
+    secondaryArts: string[];
+    minorArts: string[];
+  };
 }
 
 export interface MageState {
@@ -108,7 +125,23 @@ export interface MageState {
 
   age?: number;
   warping?: number;
-  
+  fatigue?: number;
+
+  // New creation fields
+  title?: string;
+  origin?: string;
+  originRegion?: string;
+  personalSymbol?: string;
+  appearance?: {
+    portrait: string;
+    vestment: string;
+    symbol: string;
+  };
+  specialization?: string;
+  initialLaboratory?: string;
+  ambition?: string;
+  creationChoices?: MageCreationChoices;
+
   status?: {
     physical: "stable" | "tired" | "injured" | "sick";
     mental: "focused" | "strained" | "unstable";

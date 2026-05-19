@@ -1,6 +1,6 @@
 import { GameState } from '../types/game';
 
-export const CURRENT_SAVE_VERSION = '0.7.0';
+export const CURRENT_SAVE_VERSION = '0.8.0';
 
 export function migrateSave(savedState: any): GameState {
   if (!savedState) return savedState;
@@ -65,6 +65,35 @@ export function migrateSave(savedState: any): GameState {
      delete state.charters.activeCharter.magicAuraEffect;
      delete state.charters.activeCharter.divineAuraEffect;
      delete state.charters.activeCharter.extractedVis;
+  }
+
+  // Mage creation fields — new in 0.8.0
+  if (state.mage) {
+    if (state.mage.title === undefined) state.mage.title = '';
+    if (state.mage.origin === undefined) state.mage.origin = 'unknown_legacy';
+    if (state.mage.originRegion === undefined) state.mage.originRegion = '';
+    if (state.mage.personalSymbol === undefined) state.mage.personalSymbol = '';
+    if (state.mage.appearance === undefined) state.mage.appearance = { portrait: 'middle_male', vestment: 'robes_dark', symbol: '' };
+    if (state.mage.specialization === undefined) state.mage.specialization = 'laboratory_researcher';
+    if (state.mage.initialLaboratory === undefined) state.mage.initialLaboratory = 'ancient_tower';
+    if (state.mage.ambition === undefined) state.mage.ambition = 'found_great_library';
+    if (state.mage.fatigue === undefined) state.mage.fatigue = 0;
+    if (!state.mage.virtues) state.mage.virtues = [];
+    if (!state.mage.flaws) state.mage.flaws = [];
+    if (!state.mage.history) state.mage.history = [];
+    if (!state.mage.arts) state.mage.arts = {
+      techniques: { creo: 0, intellego: 0, muto: 0, perdo: 0, rego: 0 },
+      forms: { animal: 0, aquam: 0, auram: 0, corpus: 0, herbam: 0, ignem: 0, imaginem: 0, mentem: 0, terram: 0, vim: 0 }
+    };
+    if (!state.mage.characteristics) state.mage.characteristics = {
+      intelligence: 0, communication: 0, perception: 0, presence: 0,
+      strength: 0, stamina: 0, dexterity: 0, quickness: 0
+    };
+    if (!state.mage.abilities) state.mage.abilities = {
+      magicTheory: state.mage.magicTheory ?? 5,
+      penetration: 2, finesse: 2, latin: 4,
+      leadership: 1, medicine: 0, bargain: 1, law: 0, intrigue: 1
+    };
   }
 
   // Territory migration & validation

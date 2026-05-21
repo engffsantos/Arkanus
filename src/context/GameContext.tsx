@@ -11,9 +11,10 @@ type Action =
   | { type: 'ADVANCE_TURN'; payload: { actionDetails: any, selectedActionId: string } }
   | { type: 'LOAD_STATE'; payload: GameState }
   | { type: 'CREATE_CAMPAIGN'; payload: any }
-  | { type: 'DO_ACTION'; payload: GameAction }
+  | { type: 'DO_ACTION'; payload: any }
   | { type: 'SELECT_PRIMARY_ACTION'; payload: { id: string; category: string; subAction: string; payload: any } }
   | { type: 'CANCEL_PRIMARY_ACTION' }
+  | { type: 'CLEAR_LAST_TURN_RESULT' }
   | { type: 'RESET_STATE' };
 
 const seasons: Season[] = ['Primavera', 'Verão', 'Outono', 'Inverno'];
@@ -134,7 +135,65 @@ function gameReducer(state: GameState, action: Action): GameState {
       };
     }
     case 'ADVANCE_TURN': {
-      return advanceSeason(state);
+      let stateWithAction = state;
+      if (!state.meta.primaryAction && action.payload?.selectedActionId) {
+        const id = action.payload.selectedActionId;
+        const details = action.payload.actionDetails;
+        
+        let cost: any = {};
+        let effects: any[] = [];
+        let type = 'GENERIC_ACTION';
+        
+        if (id === 'gov') {
+          cost = { silver: 8 };
+          effects = [
+            { target: 'covenant', path: 'loyalty', value: 6 },
+            { target: 'covenant', path: 'publicHealth', value: 4 }
+          ];
+        } else if (id === 'com') {
+          cost = { silver: -20 };
+        } else if (id === 'dip') {
+          cost = { silver: 10 };
+          effects = [
+            { target: 'covenant', path: 'unrest', value: -8 }
+          ];
+        } else if (id === 'con') {
+          cost = { silver: 15 };
+          effects = [
+            { target: 'covenant', path: 'security', value: 8 },
+            { target: 'covenant', path: 'unrest', value: -5 }
+          ];
+        }
+        
+        stateWithAction = {
+          ...state,
+          meta: {
+            ...state.meta,
+            primaryAction: {
+              selected: true,
+              locked: true,
+              resolved: false,
+              actionId: id,
+              actionType: type,
+              domain: details?.title || 'Ação Sazonal',
+              label: details?.title || 'Ação Sazonal',
+              payload: {
+                type,
+                description: `Ação realizada: ${details?.title || id}`,
+                cost,
+                effects
+              }
+            }
+          }
+        };
+      }
+      return advanceSeason(stateWithAction);
+    }
+    case 'CLEAR_LAST_TURN_RESULT': {
+      return {
+        ...state,
+        lastTurnResult: undefined
+      };
     }
     case 'LOAD_STATE':
       return { ...initialState, ...action.payload };

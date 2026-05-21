@@ -5,7 +5,7 @@ import { Map as MapIcon, MapPin, Zap, Coins, Users, Search, AlertCircle } from '
 export const MapScreen: React.FC = () => {
    const { state, dispatch } = useGameState();
    
-   const locations = state.territory?.locations || (Array.isArray(state.territory) ? state.territory : []);
+   const locations: any[] = state.territory?.locations || (Array.isArray(state.territory) ? state.territory : []);
 
    const [selectedLoc, setSelectedLoc] = useState<any>(locations[0]);
 
@@ -17,7 +17,7 @@ export const MapScreen: React.FC = () => {
             </h2>
             <div className="text-sm text-arkanus-text-dim uppercase tracking-widest flex gap-4">
                <div>Total de Locais: <span className="text-stone-300">{locations.length}</span></div>
-               <div>Tensão Média: <span className="text-stone-300">{(locations.reduce((a,b) => a+b.risk, 0) / locations.length).toFixed(1)}%</span></div>
+               <div>Tensão Média: <span className="text-stone-300">{(locations.length > 0 ? (locations.reduce((a: number, b: any) => a + b.risk, 0) / locations.length) : 0).toFixed(1)}%</span></div>
             </div>
          </div>
 

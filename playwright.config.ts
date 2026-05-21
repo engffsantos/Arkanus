@@ -9,7 +9,7 @@ export default defineConfig({
   fullyParallel: false, // For testing a stateful app sequentially if needed
   retries: process.env.CI ? 2 : 0,
   reporter: [
-    ["html", { outputFolder: "test-results/playwright-report" }],
+    ["html", { outputFolder: "playwright-report" }],
     ["json", { outputFile: "test-results/e2e-results.json" }],
     ["list"]
   ],
@@ -20,7 +20,7 @@ export default defineConfig({
     video: "retain-on-failure"
   },
   webServer: {
-    command: "npm run start", // assuming production start or preview
+    command: "npm run dev", // assuming production start or preview
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000

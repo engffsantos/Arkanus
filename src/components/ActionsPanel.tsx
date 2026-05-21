@@ -7,6 +7,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Trabalhar no Laboratório",
     description: "Use teoria arcana, técnica, forma e essência para avançar projetos arcanos.",
     forecast: "A pesquisa arcana avançará nesta estação.",
+    costText: "10 Prata (opcional para acelerar)",
+    effectsText: "+15 Progresso em projetos mágicos",
     icon: <Beaker className="w-12 h-12 text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.6)]" />,
     image: "https://images.unsplash.com/photo-1626027376037-b3e144a4ab5a?auto=format&fit=crop&w=400&q=80"
   },
@@ -14,6 +16,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Estudar Texto Arcano",
     description: "Dedique a estação à leitura de um Tomo Maior ou Tratado Menor na biblioteca.",
     forecast: "O conhecimento mágico do mago será ampliado.",
+    costText: "Usa a estação inteira",
+    effectsText: "+1 Progresso de Biblioteca / Conhecimento",
     icon: <BookOpen className="w-12 h-12 text-stone-300 drop-shadow-[0_0_8px_rgba(168,162,158,0.6)]" />,
     image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80"
   },
@@ -21,6 +25,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Escrever Conhecimento",
     description: "Registre os segredos descobertos no laboratório em um novo grimório.",
     forecast: "Um novo volume será adicionado à biblioteca de Arkanus.",
+    costText: "Usa a estação inteira",
+    effectsText: "Escreve um Tratado de Arte para a Biblioteca",
     icon: <PenTool className="w-12 h-12 text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]" />,
     image: "https://images.unsplash.com/photo-1580130281320-0ef0754f2bf7?auto=format&fit=crop&w=400&q=80"
   },
@@ -28,6 +34,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Administrar Feudo",
     description: "Organize os recursos, supervise os servos, melhore as condições do feudo e fortaleça a base produtiva.",
     forecast: "A lealdade aumentou, a condição sanitária melhorou e a base produtiva foi estabilizada.",
+    costText: "8 Prata (custo operacional)",
+    effectsText: "+6% Lealdade local, +4% Saúde Pública",
     icon: <ScrollText className="w-12 h-12 text-amber-200 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" />,
     image: "https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?auto=format&fit=crop&w=400&q=80"
   },
@@ -35,6 +43,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Negociação Diplomática",
     description: "Envie emissários para discutir alianças ou acalmar a inquisição e os nobres locais.",
     forecast: "As tensões locais diminuirão temporariamente.",
+    costText: "10 Prata",
+    effectsText: "-8% Revolta / Risco Político",
     icon: <Handshake className="w-12 h-12 text-yellow-600 drop-shadow-[0_0_8px_rgba(202,138,4,0.6)]" />,
     image: "https://images.unsplash.com/photo-1582215894165-2b4742ab6726?auto=format&fit=crop&w=400&q=80"
   },
@@ -42,6 +52,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Comércio Local",
     description: "Estimule negociantes e guildas de artesãos. Troque excedentes por prata.",
     forecast: "A feira local receberá um influxo de prata.",
+    costText: "Leve aumento no risco de contrabando",
+    effectsText: "+20 Prata imediatas",
     icon: <Landmark className="w-12 h-12 text-stone-400 drop-shadow-[0_0_8px_rgba(156,163,175,0.6)]" />,
     image: "https://images.unsplash.com/photo-1621252178225-b461fbf29eb5?auto=format&fit=crop&w=400&q=80"
   },
@@ -49,6 +61,8 @@ const actionDefinitions: Record<string, any> = {
     title: "Conflito Regulado",
     description: "Reuna os guardas ou convoque um duelo formal sob as antigas leis arcanas.",
     forecast: "Um rival será desafiado.",
+    costText: "15 Prata",
+    effectsText: "+8% Segurança, -5% Revolta",
     icon: <Swords className="w-12 h-12 text-red-600 drop-shadow-[0_0_8px_rgba(220,38,38,0.6)]" />,
     image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=400&q=80"
   }
@@ -70,7 +84,7 @@ export const ActionsPanel: React.FC = () => {
 
   const getNextSeason = () => {
     const seasons = ['Primavera', 'Verão', 'Outono', 'Inverno'];
-    const idx = seasons.indexOf(state.season);
+    const idx = seasons.indexOf(state.meta.season);
     return seasons[(idx + 1) % 4];
   };
 
@@ -146,6 +160,17 @@ export const ActionsPanel: React.FC = () => {
               <p className="text-[13px] font-serif text-[#4a3219] tracking-wide leading-relaxed mb-4 italic">
                 {currentDef.description}
               </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-xs font-serif text-[#3a2210]">
+                 <div className="bg-[#5c1a1a]/10 border border-[#5c1a1a]/20 p-2.5 rounded-[2px] flex flex-col">
+                    <span className="text-[9px] uppercase tracking-widest text-[#8c2a2a] font-semibold mb-0.5">Custo Estimado</span>
+                    <span className="text-[#4d1414] font-bold font-sans">{currentDef.costText}</span>
+                 </div>
+                 <div className="bg-[#1a5c1d]/10 border border-[#1a5c1d]/20 p-2.5 rounded-[2px] flex flex-col">
+                    <span className="text-[9px] uppercase tracking-widest text-[#2a8c2f] font-semibold mb-0.5">Efeitos Prováveis</span>
+                    <span className="text-[#144d18] font-bold font-sans">{currentDef.effectsText}</span>
+                 </div>
+              </div>
               
               <div className="mt-auto flex items-start gap-2 text-xs font-serif text-[#1e4620] bg-white/30 backdrop-blur-sm p-3 rounded-[2px] border border-[#1e4620]/30 shadow-sm leading-snug">
                  <p className="font-bold">{currentDef.forecast}</p>

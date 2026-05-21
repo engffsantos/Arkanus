@@ -28,6 +28,8 @@ export interface GameMeta {
   createdAt: string;
   updatedAt: string;
   version: string;
+  difficulty?: string;
+  gameMode?: string;
 }
 
 export interface ResourceState {
@@ -426,5 +428,6 @@ export interface GameState {
   conflicts: ConflictState;
   reports: ReportState;
   events: GameEvent[];
+  lastTurnResult?: any;
 }
 

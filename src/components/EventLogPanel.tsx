@@ -36,7 +36,7 @@ export const EventLogPanel: React.FC = () => {
                 <div className="w-5 flex justify-center shrink-0">{getIconForType(ev.type)}</div>
                 <span className="text-arkanus-text text-[13px]">{ev.text}</span>
               </div>
-              <span className="text-arkanus-text-dim text-[11px] shrink-0 font-serif lowercase italic pl-4">{ev.time}</span>
+              <span className="text-arkanus-text-dim text-[11px] shrink-0 font-serif lowercase italic pl-4">ano {ev.year} • {ev.season}</span>
             </li>
           ))}
         </ul>

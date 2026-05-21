@@ -7,7 +7,7 @@ export const GuildsScreen: React.FC = () => {
    const [showGuildModal, setShowGuildModal] = useState(false);
    const [newGuildType, setNewGuildType] = useState('Ferreiros');
 
-   const activeGuilds = state.guilds?.guilds || (Array.isArray(state.guilds) ? state.guilds : []);
+   const activeGuilds: any[] = state.guilds?.guilds || (Array.isArray(state.guilds) ? state.guilds : []);
 
    const guildTypes = [
      'Escribas', 'Encadernadores', 'Iluminadores', 'Ferreiros', 'Carpinteiros', 

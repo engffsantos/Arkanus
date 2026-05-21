@@ -72,3 +72,29 @@ Os conjuntos mínimos de dados estáticos e dinâmicos exigidos para o Beta fora
 O ecossistema e interface do jogo encontram-se em perfeita conformidade técnica e operacional para entrega do Release Candidate.
 
 VALIDAÇÃO DE TELAS E CONTEÚDOS APROVADA.
+
+---
+
+## Marco: Início da preparação Beta Jogável
+
+Data: 2026-05-21
+Branch: beta/1.0.0-playable
+Tag base: v1.0.0-rc1
+
+Objetivo:
+Transformar o Release Candidate técnico em Beta jogável controlado.
+
+Escopo permitido:
+- Onboarding
+- Ajustes de UX
+- Balanceamento
+- Textos explicativos
+- Feedback
+- Build e distribuição
+- Correções de bugs
+
+Escopo bloqueado:
+- Sistemas grandes novos
+- Multiplayer competitivo
+- Refatoração estrutural ampla
+- Novas camadas de conteúdo não essenciais

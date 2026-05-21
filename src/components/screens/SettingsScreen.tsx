@@ -12,6 +12,8 @@ export const SettingsScreen: React.FC = () => {
    const [showConfirmReset, setShowConfirmReset] = useState(false);
    
    const fileInputRef = useRef<HTMLInputElement>(null);
+   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error' | 'info' | null, message: string | null }>({ type: null, message: null });
+   const [importedSummary, setImportedSummary] = useState<{ covenantName: string, mageName: string, year: number, season: string } | null>(null);
 
    const handleLogout = async () => {
        try {
@@ -40,10 +42,15 @@ export const SettingsScreen: React.FC = () => {
        dispatch({ type: 'LOAD_STATE', payload: newState });
    };
 
-   const handleForceSave = () => {
-       dispatch({ type: 'RESOLVE_ACTION', payload: { type: 'FORCE_SAVE' } });
-       alert("Pedido de salvamento enviado!");
-   };
+    const handleForceSave = () => {
+        try {
+            const localKey = user ? `arkanus_save_${user.uid}` : 'arkanus_save_guest';
+            localStorage.setItem(localKey, JSON.stringify(state));
+            setStatusMsg({ type: 'success', message: 'Progresso da campanha salvo localmente com sucesso!' });
+        } catch (error) {
+            setStatusMsg({ type: 'error', message: 'Erro ao salvar o progresso localmente.' });
+        }
+    };
 
    const handleExportSave = () => {
        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
@@ -68,20 +75,83 @@ export const SettingsScreen: React.FC = () => {
        const reader = new FileReader();
        reader.onload = (e) => {
            try {
-               const parsedState = JSON.parse(e.target?.result as string);
-               if (parsedState && parsedState.meta && parsedState.meta.saveVersion) {
-                   dispatch({ type: 'LOAD_STATE', payload: parsedState });
-                   alert("Campanha importada com sucesso!");
-               } else {
-                   alert("Save inválido: não parece ser um save do Arkanus.");
+               const jsonText = e.target?.result as string;
+               const parsedState = JSON.parse(jsonText);
+               
+               // 1. Verify valid JSON / object structure
+               if (!parsedState || typeof parsedState !== 'object') {
+                   setStatusMsg({ type: 'error', message: 'Importação falhou: O arquivo não é um objeto JSON válido.' });
+                   setImportedSummary(null);
+                   return;
                }
+
+               // 2. Verify saveVersion / version
+               const version = parsedState.meta?.version || parsedState.meta?.saveVersion;
+               if (!parsedState.meta || version !== '1.0.0-beta.1') {
+                   setStatusMsg({ 
+                       type: 'error', 
+                       message: `Importação falhou: Versão do save incompatível. Esperado "1.0.0-beta.1", recebido "${version || 'desconhecido'}".` 
+                   });
+                   setImportedSummary(null);
+                   return;
+               }
+
+               // 3. Verify required fields
+               const requiredFields = ['meta', 'resources', 'covenant', 'mage', 'laboratory', 'library'];
+               for (const field of requiredFields) {
+                   if (!parsedState[field]) {
+                       setStatusMsg({ type: 'error', message: `Importação falhou: Campo obrigatório "${field}" está ausente.` });
+                       setImportedSummary(null);
+                       return;
+                   }
+               }
+
+               // 4. Create automatic backup of current save
+               try {
+                   localStorage.setItem('arkanus_backup_save', JSON.stringify(state));
+               } catch (backupError) {
+                   console.warn("Falha ao criar backup no localStorage", backupError);
+               }
+
+               // 5. Import / Load State
+               dispatch({ type: 'LOAD_STATE', payload: parsedState });
+
+               // 6. Recarregar campanha e mostrar resumo
+               setStatusMsg({ 
+                   type: 'success', 
+                   message: 'Save importado com sucesso! Backup da campanha anterior armazenado em segurança.' 
+               });
+               setImportedSummary({
+                   covenantName: parsedState.covenant.name || 'Soberania sem nome',
+                   mageName: parsedState.mage.name || 'Mago sem nome',
+                   year: parsedState.meta.year || 1,
+                   season: parsedState.meta.season || 'Primavera'
+               });
+
            } catch (error) {
-               alert("Erro ao ler o arquivo. Tem certeza que é um JSON válido?");
+               setStatusMsg({ type: 'error', message: 'Erro ao processar o arquivo. Certifique-se de que é um arquivo JSON válido do Arkanus.' });
+               setImportedSummary(null);
            }
        };
        reader.readAsText(file);
        event.target.value = '';
    };
+
+    const handleRestoreBackup = () => {
+        try {
+            const backup = localStorage.getItem('arkanus_backup_save');
+            if (backup) {
+                const parsed = JSON.parse(backup);
+                dispatch({ type: 'LOAD_STATE', payload: parsed });
+                setStatusMsg({ type: 'success', message: 'Campanha anterior restaurada com sucesso!' });
+                setImportedSummary(null);
+            } else {
+                setStatusMsg({ type: 'error', message: 'Nenhum backup de segurança encontrado.' });
+            }
+        } catch (error) {
+            setStatusMsg({ type: 'error', message: 'Erro ao restaurar o backup de segurança.' });
+        }
+    };
 
    return (
       <div className="h-full flex flex-col gap-6">
@@ -146,11 +216,57 @@ export const SettingsScreen: React.FC = () => {
                        <Server className="w-5 h-5 text-emerald-600" /> Save & Nuvem
                     </h2>
                     <div className="space-y-4">
+                        {statusMsg.type && (
+                             <div className={`p-4 rounded border ${
+                                 statusMsg.type === 'success' ? 'bg-emerald-950/20 border-emerald-800/60 text-emerald-300' :
+                                 statusMsg.type === 'error' ? 'bg-red-950/20 border-red-900/60 text-red-300' :
+                                 'bg-blue-950/20 border-blue-900/60 text-blue-300'
+                             } flex flex-col gap-3 transition-all duration-300`}>
+                                 <div className="flex items-center gap-2">
+                                     {statusMsg.type === 'success' && <div className="text-emerald-400 font-bold shrink-0">✓</div>}
+                                     {statusMsg.type === 'error' && <AlertTriangle className="w-5 h-5 text-red-400 shrink-0" />}
+                                     {statusMsg.type === 'info' && <Info className="w-5 h-5 text-blue-400 shrink-0" />}
+                                     <span className="text-sm">{statusMsg.message}</span>
+                                 </div>
+                                 
+                                 {statusMsg.type === 'success' && importedSummary && (
+                                     <div className="bg-stone-900/50 p-3 rounded border border-emerald-900/30 text-xs text-stone-300 mt-1 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                         <div>
+                                             <span className="text-stone-500 uppercase tracking-widest text-[9px] block">Soberania</span>
+                                             <span className="font-bold text-stone-200">{importedSummary.covenantName}</span>
+                                         </div>
+                                         <div>
+                                             <span className="text-stone-500 uppercase tracking-widest text-[9px] block">Mago</span>
+                                             <span className="font-bold text-stone-200">{importedSummary.mageName}</span>
+                                         </div>
+                                         <div>
+                                             <span className="text-stone-500 uppercase tracking-widest text-[9px] block">Ano</span>
+                                             <span className="font-bold text-stone-200">{importedSummary.year}</span>
+                                         </div>
+                                         <div>
+                                             <span className="text-stone-500 uppercase tracking-widest text-[9px] block">Estação</span>
+                                             <span className="font-bold text-stone-200">{importedSummary.season}</span>
+                                         </div>
+                                     </div>
+                                 )}
+
+                                 {localStorage.getItem('arkanus_backup_save') && (
+                                     <div className="flex justify-end border-t border-stone-800/50 pt-2 mt-1">
+                                         <button 
+                                             onClick={handleRestoreBackup}
+                                             className="text-xs text-amber-500 hover:text-amber-400 font-bold underline transition-colors cursor-pointer"
+                                         >
+                                             Desfazer importação (restaurar campanha anterior)
+                                         </button>
+                                     </div>
+                                 )}
+                             </div>
+                         )}
                         <div className="flex flex-col sm:flex-row gap-4 bg-[#1a1511] p-5 rounded border border-stone-800 justify-between items-center">
                            <div className="flex-1 text-center sm:text-left">
                               <div className="font-bold text-stone-200">Sincronização Ativa</div>
                               <div className="text-sm text-stone-400 mt-1">Sua campanha salva automaticamente a cada ação e virada de estação. Você também pode baixar o save localmente por segurança.</div>
-                              <div className="text-xs text-stone-500 mt-2 font-mono">Save Version: {state.meta.saveVersion} | UID Vinculado</div>
+                              <div className="text-xs text-stone-500 mt-2 font-mono">Save Version: {state.meta.version} | UID Vinculado</div>
                            </div>
                            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2">
                                 <button onClick={handleForceSave} className="px-4 py-2 bg-emerald-900/30 text-emerald-400 hover:bg-emerald-900/50 border border-emerald-900/50 rounded transition-colors flex items-center gap-2 text-sm shadow">

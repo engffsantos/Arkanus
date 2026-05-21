@@ -28,11 +28,14 @@ export const LoginScreen: React.FC = () => {
 
           <button
             onClick={loginAsGuest}
-            className="w-full py-3 px-6 bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 text-stone-300 transition-colors uppercase tracking-[0.15em] font-medium text-sm rounded flex justify-center items-center gap-3 cursor-pointer"
+            className="w-full py-3 px-6 bg-stone-900 hover:bg-stone-800 border border-stone-850 hover:border-stone-700 text-stone-300 transition-colors uppercase tracking-[0.15em] font-medium text-sm rounded flex justify-center items-center gap-3 cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-amber-500" />
-            Entrar em Modo Teste
+            Entrar em Modo Teste Beta
           </button>
+          <p className="text-[11px] text-arkanus-text-dim text-center mt-1 leading-snug">
+            Comece uma campanha local pronta para testar o ciclo sazonal, sem login real.
+          </p>
         </div>
       </div>
 

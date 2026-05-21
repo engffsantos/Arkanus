@@ -1,6 +1,6 @@
 import { GameState } from '../types/game';
 
-export const CURRENT_SAVE_VERSION = '0.8.0';
+export const CURRENT_SAVE_VERSION = '1.0.0-beta.1';
 
 export function migrateSave(savedState: any): GameState {
   if (!savedState) return savedState;

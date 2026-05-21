@@ -107,12 +107,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 12,
+                  "duration": 17,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.922Z",
+                  "startTime": "2026-05-21T12:43:36.738Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -138,15 +138,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 8,
-                  "parallelIndex": 3,
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 16,
+                  "duration": 14,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.190Z",
+                  "startTime": "2026-05-21T12:43:38.217Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -183,12 +183,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 12,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.871Z",
+                  "startTime": "2026-05-21T12:43:36.758Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -215,14 +215,14 @@
               "results": [
                 {
                   "workerIndex": 7,
-                  "parallelIndex": 0,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 14,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.190Z",
+                  "startTime": "2026-05-21T12:43:38.233Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -259,12 +259,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 17,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:39.004Z",
+                  "startTime": "2026-05-21T12:43:36.755Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -290,15 +290,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 6,
+                  "workerIndex": 8,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 13,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.188Z",
+                  "startTime": "2026-05-21T12:43:38.216Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -335,12 +335,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 12,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.915Z",
+                  "startTime": "2026-05-21T12:43:36.754Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -366,15 +366,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 9,
+                  "workerIndex": 10,
                   "parallelIndex": 5,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.110Z",
+                  "startTime": "2026-05-21T12:43:38.239Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -411,12 +411,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 14,
+                  "duration": 16,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.969Z",
+                  "startTime": "2026-05-21T12:43:36.755Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -442,15 +442,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 10,
-                  "parallelIndex": 4,
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 9,
+                  "duration": 14,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.204Z",
+                  "startTime": "2026-05-21T12:43:38.236Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -487,12 +487,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 5,
                   "status": "passed",
-                  "duration": 12,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.910Z",
+                  "startTime": "2026-05-21T12:43:36.786Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -519,14 +519,14 @@
               "results": [
                 {
                   "workerIndex": 11,
-                  "parallelIndex": 2,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 6,
+                  "duration": 15,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.288Z",
+                  "startTime": "2026-05-21T12:43:38.250Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -560,15 +560,15 @@
               "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:38.989Z",
+                  "startTime": "2026-05-21T12:43:36.854Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -594,15 +594,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 5,
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
                   "status": "passed",
-                  "duration": 1,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.198Z",
+                  "startTime": "2026-05-21T12:43:38.344Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -636,15 +636,15 @@
               "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 5,
-                  "parallelIndex": 5,
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 2,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:39.020Z",
+                  "startTime": "2026-05-21T12:43:36.884Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -670,15 +670,15 @@
               "projectName": "mobile-chrome",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 5,
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-05-21T12:26:40.244Z",
+                  "startTime": "2026-05-21T12:43:38.351Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -696,8 +696,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-21T12:26:36.717Z",
-    "duration": 3749.447,
+    "startTime": "2026-05-21T12:43:34.335Z",
+    "duration": 4211.514,
     "expected": 16,
     "skipped": 0,
     "unexpected": 0,

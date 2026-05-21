@@ -101,8 +101,9 @@ export const PortalScreen: React.FC = () => {
 
         </div>
 
-        <div className="mt-8 text-center text-xs text-arkanus-text-dim font-serif italic opacity-70">
-          Status: Salvo na nuvem via Firestore
+        <div className="mt-8 text-center text-xs text-arkanus-text-dim font-serif italic opacity-70 flex flex-col gap-1">
+          <span>Status: Salvo na nuvem via Firestore</span>
+          <span className="text-[10px] text-arkanus-gold/60 font-mono tracking-wider">v1.0.0-beta.1</span>
         </div>
       </div>
 

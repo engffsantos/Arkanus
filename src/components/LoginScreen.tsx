@@ -12,6 +12,7 @@ export const LoginScreen: React.FC = () => {
       <div className="relative z-10 bg-arkanus-panel border border-arkanus-border p-10 rounded shadow-2xl flex flex-col items-center gap-6 max-w-md w-full">
         <div className="flex flex-col items-center gap-2">
           <h1 className="font-display text-4xl text-arkanus-gold tracking-[0.3em] uppercase">Arkanus</h1>
+          <span className="text-[10px] text-arkanus-gold/60 uppercase tracking-widest font-mono font-bold bg-[#ce9c56]/10 border border-[#ce9c56]/20 px-2 py-0.5 rounded-[2px]">Beta v1.0.0-beta.1</span>
           <p className="text-arkanus-text-dim font-serif italic text-center">Governe uma soberania arcana por estações.</p>
         </div>
 
